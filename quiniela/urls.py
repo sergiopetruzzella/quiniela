@@ -29,6 +29,9 @@ urlpatterns = [
     path('register/', accounts_views.register_view ),
 
     path('schedule/create', schedule_views.schedule_create_view),
+    
+    path('schedule/create', schedule_views.schedule_create_view),
+
 
 
     path('admin/', admin.site.urls),

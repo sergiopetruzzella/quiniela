@@ -4,10 +4,10 @@
     {% csrf_token %}
 
 {% for x in list %}
-<div style="display:flex">
-   <label for="" style="width: 100px;">{{x.local}} &#127474;&#127468;</label> 
-   <input type="number" value="0" required max="9" min="0" name="local{{x.id}}"> - 
-   <input type="number" value="1" required max="9" min="0" name="visitor{{x.id}}">
+<div style="display:flex; height: 2em; padding: 2px; align-items: center;" >
+   <label for="" style="width: 200px; text-align: right; padding-right: 10px;">{{x.local}} &#127474;&#127468;</label> 
+   <input type="number" value="0" required max="9" min="0" name="local{{x.id}}"  style="height: 2em"> - 
+   <input type="number" value="1" required max="9" min="0" name="visitor{{x.id}}" style="height: 2em">
    <label for="" style="width: 100px">{{x.visitor}}</label>
 </div>
 {% endfor %}

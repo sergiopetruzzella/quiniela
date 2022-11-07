@@ -8,3 +8,6 @@ def home_view (request):
 
 def desk_view (request):
     return  render(request, 'desk.html', {})
+
+def admin_manage_view (request):
+    return  render(request, 'admin-manage.html', {})
