@@ -1,3 +1,4 @@
 # created by virtualenv automaticallyitt
 bin/
 lib/
+quiniela/__pycache__/
