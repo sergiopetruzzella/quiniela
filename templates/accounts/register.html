@@ -1,0 +1,17 @@
+<div  style="margin-top: 30px">
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div style="display:flex"><label style="width: 200px;" for="username">Nombre de Usuario</label><input type="text" name="username" placeholder="username"></div>
+        <div style="display:flex"><label style="width: 200px;" for="password">Contrasena</label><input type="password" name="password"></div>
+        <div style="display:flex"><label style="width: 200px;" for="password2">Repetir Contrasena</label><input type="password" name="password2"></div>
+        <button type="submit">Entrar</button>
+    </form>
+    
+    {% if m %}
+    <h3 style="color:{{c}}">{{m}}</h3>
+    {% endif %}
+    {% if c == "green" %}
+    <a href="/login">Iniciar sesion</a>
+     {% endif %}
+
+</div>
