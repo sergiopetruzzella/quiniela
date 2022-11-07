@@ -18,7 +18,7 @@ from django.urls import path
 from accounts import views as accounts_views
 from schedule import views as schedule_views
 
-from .views import home_view, desk_view, admin_manage_view
+from .views import home_view, desk_view, admin_manage_view, generate_points
 
 urlpatterns = [
     path('',  home_view),
@@ -31,8 +31,7 @@ urlpatterns = [
     path('schedule/create/', schedule_views.schedule_create_view),
     
     path('manage/', admin_manage_view),
-
-
+    path('manage/generate-points/', generate_points),
 
 
     path('admin/', admin.site.urls),
