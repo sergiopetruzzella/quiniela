@@ -12,7 +12,8 @@ def login_view (request):
         if user is None: 
             context = {"error": "invalid username"}
             return render(request,  'accounts/login.html', context )
-        login(user,password)
+        login(request,user)
+
         
         return redirect('/desk')
     return render(request,  'accounts/login.html', {})
