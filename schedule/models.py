@@ -9,6 +9,11 @@ class Match(models.Model):
     user_id = models.IntegerField()
     match_number = models.IntegerField()
 
+
+class RealScore(models.Model):
+    local_score = models.IntegerField()
+    visitor_score = models.IntegerField()
+
 class Schedule(models.Model):
     match_1 = Match()
     match_2 = Match()

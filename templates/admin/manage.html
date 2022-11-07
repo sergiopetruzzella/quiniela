@@ -1,0 +1,15 @@
+{% if all_scores %}
+    {% for x in all_scores %}
+        <div>id: {{x.id}} --- local: {{x.local_score}} --- local: {{x.visitor_score}}</div>
+    {% endfor %}
+{% endif %}
+
+<form action="." method="POST">
+    {% csrf_token %}
+<input type="number" name="match_number" id="">
+<input type="number" name="local_score" id="">
+<input type="number" name="visitor_score" id="">
+<button type="submit">Crear Nuevo Score </button>
+</form>
+
+<h1><a href="manage/generate-points">Generara Puntuacion</a></h1>
