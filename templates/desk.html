@@ -1,0 +1,14 @@
+{% if request.user.is_authenticated %}
+<H1>Hola {{request.user}}</H1>
+
+<h2><a href="/schedule/create">Crear Quiniela</a></h2>
+
+
+
+<a href="/logout">Salir</a>
+
+{% else %}
+<h2>Inicie sesion</h2>
+<a href="/login">Iniciar Sesion</a>
+{% endif%}
+

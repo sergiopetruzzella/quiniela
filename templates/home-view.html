@@ -1,0 +1,13 @@
+<h1>Hello From Homee</h1>
+{% if request.user.is_authenticated %}
+<p>el usuario esta registrado</p>
+<div>
+    <a href="/desk">Iniciar</a>
+</div>
+{% else %}
+<p> el usuario NO esta registarado</p>
+<div>
+    <a href="/login">iniciar sesion</a>
+    <a href="/register">crear cuenta</a>   
+   </div>
+{% endif %}

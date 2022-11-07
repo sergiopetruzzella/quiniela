@@ -1,0 +1,24 @@
+<h2> Iniciar Sesion </h2>
+
+{% if error %}
+<h1 style="color: red">{{error}}</h1>
+{% endif %}
+
+{% if not request.user.is_authenticated  %}
+<div  style="margin-top: 30px">
+    <form action="." method="POST">
+        {% csrf_token %}
+        <div><input type="text" name="username" placeholder="username"></div>
+        <div><input type="password" name="password"></div>
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+{% else %}
+<h4>Ya iniciaste sesion</h4>
+<div>
+    <a href="/desk"> ir al inicio</a>
+    <a href="/logout">cerrar sesion</a>
+
+
+</div>
+{% endif %}
