@@ -24,17 +24,34 @@ def admin_manage_view (request):
 
 
 def generate_points (request):
-    scores = RealScore.objects.all()
-    users = User.objects.all()
+    ########################### ACA SE GENERA LA PUNTUACION DE TODOS LOS USUARIOS DE LA PLATAFORMA
+    scores = RealScore.objects.all() # Resultados Reales
+    users = User.objects.all() # Cargo los Usuarios
     for x in users:
-        user_schedule = Match.objects.filter(user_id=x.id)
+        user_schedule = Match.objects.filter(user_id=x.id) #Extraigo las predicciones de un usuario
         points = 0 
-        for i in scores:
+        for i in scores:  #recorro cada juego 
             try:
                 us = user_schedule.get(match_number=i.id) #user Score
                 user_result = (-us.local_score + us.visitor_score)/abs(us.local_score - us.visitor_score)
                 real_result = (-i.local_score + i.visitor_score)/abs(i.local_score - i.visitor_score)
-                if user_result == real_result : points += 1 
+                user_goal_diference = -us.local_score + us.visitor_score
+                real_goal_diference = -i.local_score + i.visitor_score
+                goals_diference_error  = abs(user_goal_diference - real_goal_diference)
+                
+                if user_result == real_result : 
+                    points += 4 # 4 puntos por acertar vencedor
+                elif goals_diference_error == 1:
+                    points+= 1  # 1 1 punto de comodin
+                
+                if us.local_score == i.local_score:
+                    points+= 1 #punto por acertar goles del local
+                
+                if us.visitor_score == i.visitor_score:
+                    points+= 1 #punto por acertar goles del visitante
+                
+                if user_goal_diference == real_goal_diference:
+                    points+= 1 #punto por acertar diferencia de goles
             except:
                 pass
         try:    
