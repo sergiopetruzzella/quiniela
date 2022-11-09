@@ -10,9 +10,17 @@ def home_view (request):
     return  render(request, 'home-view.html', {})
 
 def desk_view (request):
-    return  render(request, 'desk.html', {})
+    users_scores = UserScore.objects.order_by("-points")
+    context = {"list": users_scores}
+    
+
+    return  render(request, 'desk.html', context)
 
 def admin_manage_view (request):   
+    if not request.user.is_superuser: 
+        return render(request, 'forbidden.html', {})
+
+
     if request.method == "POST": 
         RealScore.objects.create(
             local_score = request.POST.get("local_score"),
