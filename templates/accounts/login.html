@@ -1,24 +1,44 @@
-<h2> Iniciar Sesion </h2>
-
+{% extends "base.html" %}
+{% block content %}
 {% if error %}
 <h1 style="color: red">{{error}}</h1>
 {% endif %}
+<div class="d-flex justify-content-center h-100 align-items-center" >
+    <div class="card text-center p-4">
+        {% if not request.user.is_authenticated  %}
 
-{% if not request.user.is_authenticated  %}
-<div  style="margin-top: 30px">
-    <form action="." method="POST">
-        {% csrf_token %}
-        <div><input type="text" name="username" placeholder="username"></div>
-        <div><input type="password" name="password"></div>
-        <button type="submit">Entrar</button>
+        <h2 class="mb-3"> Iniciar Sesion </h2>
+        <form action="." method="POST">
+            {% csrf_token %}
+      <!-- Email input -->
+      <div class="form-outline mb-3">
+        <input type="text" id="form2Example1" class="form-control" name="username" required/>
+        <label class="form-label" for="form2Example1" ">Nombre de Usuario</label>
+      </div>
+    
+      <!-- Password input -->
+      <div class="form-outline mb-3">
+        <input type="password" id="form2Example2" class="form-control" name="password"/>
+        <label class="form-label" for="form2Example2">Clave</label>
+      </div> 
+      <!-- Submit button -->
+      <button type="submit" class="btn btn-primary btn-block mb-4">Entrar</button>
+    
+      <!-- Register buttons -->
+      <div class="text-center">
+        <p>No estas registrado<a href="../register">Resgistrarse</a></p>
+      </div>
     </form>
-</div>
-{% else %}
-<h4>Ya iniciaste sesion</h4>
+    {% else %}
+    <h4>Ya iniciaste sesion</h4>
 <div>
     <a href="/desk"> ir al inicio</a>
     <a href="/logout">cerrar sesion</a>
 </div>
-{% endif %}
+    {% endif%}
+    </div>
+    </div>
+
+{% endblock content %}
 
 

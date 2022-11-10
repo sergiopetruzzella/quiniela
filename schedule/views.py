@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Schedule, Match
+
 
 
 # Create your views here.
@@ -72,7 +73,8 @@ def schedule_create_view(request):
 
             print(game.local, game.local_score, game.visitor, game.visitor_score)
         print(request.user.id)     
-        render(request, 'schedule/create.html', {})
+        return redirect('/desk/')
+        
 
     context = {"list" :  match_schedule }
     return  render(request, 'schedule/create.html', context)

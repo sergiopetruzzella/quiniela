@@ -1,13 +1,24 @@
-<h1>Hello From Homee</h1>
+{%extends 'base.html' %}
+{%block content%}
+<div class="d-flex justify-content-center h-100 align-items-center" >
+<div class="card text-center p-4">
+    <div class="card-body align-items-center" >
+    <h5 class="card-title">QUINIELA</h5>
 {% if request.user.is_authenticated %}
-<p>el usuario esta registrado</p>
-<div>
-    <a href="/desk">Iniciar</a>
-</div>
+    <p class="card-text">el usuario esta registrado</p>
+    <a class="btn btn-primary" href="/desk">Iniciar</a>
 {% else %}
-<p> el usuario NO esta registarado</p>
-<div>
-    <a href="/login">iniciar sesion</a>
-    <a href="/register">crear cuenta</a>   
-   </div>
+    <p class="card-text"> el usuario NO esta registarado</p>
+    <a href="/login" class="btn btn-primary">iniciar sesion</a>
+    <a href="/register" class="btn btn-primary">crear cuenta</a>   
+   
 {% endif %}
+</div>
+</div>
+</div>
+
+
+{% endblock %}
+https://assets.khelnow.com/news/uploads/2022/08/fifa-world-cup-22.jpg
+
+

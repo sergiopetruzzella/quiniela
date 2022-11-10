@@ -1,7 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
 
-<h2><a href="/schedule/create">Crear Quiniela</a></h2>
+<a href="/schedule/create" class="btn btn-primary btn-lg m-5">Crear Quiniela</a>
 {% include "admin/table.html"%}
 
 
@@ -10,7 +12,7 @@
 <h2>Inicie sesion</h2>
 <a href="/login">Iniciar Sesion</a>
 {% endif%}
-
+{% endblock %}
 
 
 
