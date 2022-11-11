@@ -1,1 +1,0 @@
-web: qunicorn quiniela.wsgi --log-file - 
