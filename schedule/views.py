@@ -10,7 +10,7 @@ def schedule_create_view(request):
                       {"id":"2",  "local" : "Senegal"    , "visitor" : "Holanda"},
                       {"id":"3",  "local" : "Inglaterra" , "visitor" : "Iran"},
                       {"id":"4",  "local" : "USA"        , "visitor" : "Gales"},
-                      {"id":"5",  "local" : "Francia"    , "visitor" : " Austria"},
+                      {"id":"5",  "local" : "Francia"    , "visitor" : "Australia"},
                       {"id":"6",  "local" : "Dinamarca"  , "visitor" : "Tunez"},
                       {"id":"7",  "local" : "Mexico"     , "visitor" : "Polonia"},
                       {"id":"8",  "local" : "Argentina"  , "visitor" : "Arabia Saudita"},
@@ -56,6 +56,57 @@ def schedule_create_view(request):
                       {"id":"48",  "local" : "Camerun"    , "visitor" : "Brasil"  },
     ]
 
+    flags = { 
+        "Arabia Saudita": "\U0001f1f8\U0001f1e6",
+        "Alemania": "\U0001f1e9\U0001f1ea",
+        "Argentina": "\U0001f1e6\U0001f1f7" ,
+        "Australia":"\U0001f1e6\U0001f1fa",
+        "Belgica": 	"\U0001f1e7\U0001f1ea",
+        "Brasil": "\U0001f1e7\U0001f1f7", 
+        "Camerun": "\U0001f1e8\U0001f1f2",
+        "Canada": "\U0001f1e8\U0001f1e6",
+        "Costa Rica" : "\U0001f1e8\U0001f1f7",
+        "Corea": "\U0001f1f0\U0001f1f7",  
+        "Catar": "\U0001f1f6\U0001f1e6", 
+        "Croacia": "\U0001f1ed\U0001f1f7", 
+        "Dinamarca": "\U0001f1e9\U0001f1f0",
+        "Espana" :"\U0001f1ea\U0001f1f8", 
+        "Ecuador": "\U0001f1ea\U0001f1e8",
+        "Francia":"\U0001f1eb\U0001f1f7",
+        "Ghana": "\U0001f1ec\U0001f1ed",
+        "Gales": "	\U0001f3f4\U000e0067\U000e0062\U000e0077\U000e006c\U000e0073\U000e007f",
+        "Holanda":"\U0001f1f3\U0001f1f1",
+        "Inglaterra": "\U0001f3f4\U000e0067\U000e0062\U000e0065\U000e006e\U000e0067\U000e007f",
+        "Iran": "\U0001f1ee\U0001f1f7",
+        "Japon": "\U0001f1ef\U0001f1f5",
+        "Marruecos": "\U0001f1f2\U0001f1e6", 
+        "Mexico": "\U0001f1f2\U0001f1fd",
+        "Portugal": "\U0001f1f5\U0001f1f9",
+        "Polonia": "\U0001f1f5\U0001f1f1",
+        "Serbia": "\U0001f1f7\U0001f1f8",
+        "Suiza": "\U0001f1e8\U0001f1ed" , 
+        "Senegal" : "\U0001f1f8\U0001f1f3",
+        "Tunez": "\U0001f1f9\U0001f1f3",  
+        "USA": "\U0001f1fa\U0001f1f8",
+        "Uruguay": "\U0001f1fa\U0001f1fe",
+        
+
+
+
+        }
+
+    for i in match_schedule:
+        try:
+            i["lf"] = flags[i['local']] 
+        except: 
+            pass
+        try: 
+            i["vf"] = flags[i['visitor']]
+        except: 
+            pass
+        
+
+
     if request.method == "POST":
         print (request.POST)
 
@@ -76,7 +127,7 @@ def schedule_create_view(request):
         return redirect('/desk/')
         
 
-    context = {"list" :  match_schedule }
+    context = {"list" :  match_schedule, "flags" :flags}
     return  render(request, 'schedule/create.html', context)
 
     
