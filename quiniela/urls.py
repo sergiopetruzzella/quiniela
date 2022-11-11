@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import path
 from accounts import views as accounts_views
 from schedule import views as schedule_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 from .views import home_view, desk_view, admin_manage_view, generate_points
 
@@ -35,4 +37,4 @@ urlpatterns = [
 
 
     path('admin/', admin.site.urls),
-]
+] + static(settings.STATIC_URL, document_root= settings.STATIC_ROOT)
