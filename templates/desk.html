@@ -3,7 +3,7 @@
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
 
-<a href="/schedule/create" class="btn btn-primary btn-lg m-5">Crear Quiniela</a>
+<a href="/schedule/create" class="btn text-gold bg-red btn-lg m-5">Crear Quiniela</a>
 {% include "admin/table.html"%}
 
 

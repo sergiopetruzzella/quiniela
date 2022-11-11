@@ -6,11 +6,11 @@
     <h5 class="card-title">QUINIELA</h5>
 {% if request.user.is_authenticated %}
     <p class="card-text">el usuario esta registrado</p>
-    <a class="btn btn-primary" href="/desk">Iniciar</a>
+    <a class="btn text-gold bg-red" href="/desk">Iniciar</a>
 {% else %}
     <p class="card-text"> el usuario NO esta registarado</p>
-    <a href="/login" class="btn btn-primary">iniciar sesion</a>
-    <a href="/register" class="btn btn-primary">crear cuenta</a>   
+    <a href="/login" class="btn text-gold bg-red">iniciar sesion</a>
+    <a href="/register" class="btn text-gold bg-red">crear cuenta</a>   
    
 {% endif %}
 </div>

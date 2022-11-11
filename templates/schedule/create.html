@@ -1,18 +1,50 @@
-<h1> Crear Quiniela</h1>
-
-<form action="/schedule/create/" method="POST">
+{%extends 'base.html' %}
+{%block content%}
+<div class="container row">
+    <div class="col-4"></div>
+<h1 class="text-center col-6"> Crear Quiniela</h1>
+<div class="col-4"></div>
+</div>
+<form action="/schedule/create/" class="align-items-center" method="POST">
     {% csrf_token %}
 
 {% for x in list %}
-<div style="display:flex; height: 2em; padding: 2px; align-items: center;" >
-   <label for="" style="width: 200px; text-align: right; padding-right: 10px;">{{x.local}} &#127474;&#127468;</label> 
-   <input type="number" value="0" required max="9" min="0" name="local{{x.id}}"  style="height: 2em"> - 
-   <input type="number" value="1" required max="9" min="0" name="visitor{{x.id}}" style="height: 2em">
-   <label for="" style="width: 100px">{{x.visitor}}</label>
+<div class="form-group row" >
+   <label for="" class="col-4 col-form-label text-end">{{x.local}} &#127474;&#127468;</label> 
+   <div class="col-2">
+        <input class="col-2 form-control" type="number" value="0" required max="9" min="0" name="local{{x.id}}"  style="height: 2em">
+    </div>
+    <div class="col-2">
+   <input class="form-control" type="number" value="1" required max="9" min="0" name="visitor{{x.id}}" style="height: 2em">
+    </div>
+   
+   <label class="col-4 col-form-label text-start" for="">&#127474;&#127468; {{x.visitor}}   </label>
 </div>
 {% endfor %}
-<button type="submit">Enviar Quiniela</button>
-
-
-
+<div class="form-group row pt-3" >
+<div class="col-4" ></div>
+<button type="submit" class="btn bg-red text-gold btn-lg col-4 ">Enviar Quiniela</button>
+<div class="col-4" ></div>
+</div>
 </form>
+
+
+<style> 
+@media (max-width: 600px) {
+    .col-form-label, .form-control {
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+    .col-2, .col-form-label {
+      padding: 2px 4px;
+    }
+
+
+
+    @media (max-width: 450px) {
+    .col-form-label, .form-control {
+      font-size: 0.8rem;
+    }
+  } </style>
+{% endblock %}
