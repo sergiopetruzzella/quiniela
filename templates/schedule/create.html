@@ -1,9 +1,9 @@
 {%extends 'base.html' %}
 {%block content%}
-<div class="container row p-3">
-    <div class="col-4"></div>
-<h1 class="text-center col-6"> Crear Quiniela</h1>
-<div class="col-4"></div>
+<div class="container row align-items-center p-3">
+    
+<h1 class="text-center"> Crear Quiniela</h1>
+
 </div>
 <form action="/schedule/create/" class="align-items-center" method="POST">
     {% csrf_token %}
@@ -44,7 +44,7 @@
 
     @media (max-width: 450px) {
     .col-form-label, .form-control {
-      font-size: 0.8rem;
+      font-size: 0.9rem;
     }
   } </style>
 {% endblock %}
