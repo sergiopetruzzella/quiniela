@@ -35,13 +35,14 @@
 
     body{ 
         height:100%; 
+        background-color: #470217
     }
 
     #content {
         background-image: url('https://assets.khelnow.com/news/uploads/2022/08/fifa-world-cup-22.jpg');
         background-repeat: no-repeat;
-        background-size: cover;
         height:100%; 
+        background-size: contain;
     }
 
 
@@ -52,6 +53,13 @@
     .text-gold { color: #FBEFE1        }
     .bg-gold{background-color: #FBEFE1 }
     .tx-sm {font-size: 0.8rem ;
+    }
+
+    @media (max-width: 600px) {
+    #content {
+        background-image: url('https://i.pinimg.com/originals/6f/71/4f/6f714f9e9b3eab30ccec71f3b888ca28.png');
+        background-repeat: repeat;
+
     }
 
 
