@@ -31,6 +31,8 @@ urlpatterns = [
     path('register/', accounts_views.register_view ),
 
     path('schedule/create/', schedule_views.schedule_create_view),
+    path('schedule/view/', schedule_views.schedule_view_selections),
+
     
     path('manage/', admin_manage_view),
     path('manage/generate-points/', generate_points),

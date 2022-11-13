@@ -23,11 +23,3 @@ class UserScore(models.Model):
         primary_key=True,
     )
     points = models.IntegerField()
-
-class Schedule(models.Model):
-    match_1 = Match()
-    match_2 = Match()
-    match_3 = Match()
-    match_4 = Match()
-    match_5 = Match()
-    match_6 = Match()

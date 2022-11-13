@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--_%kp^6*6b#8(5d@gg4$xg+$2w7m)b^w7_luyku65*ffyn%9%p'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -76,24 +76,25 @@ WSGI_APPLICATION = 'quiniela.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ddce172c2l64i4', 
-        'USER': 'qyfkxtnrbxcjaw',
-        'PASSWORD': '1d1647d87d3db01d458f38397f8947bc046a794239687028d2751f1dfc526c41',
-        'HOST': 'ec2-54-163-34-107.compute-1.amazonaws.com',
-        'PORT':  '5432', 
-                }
-}
-
-
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'ddce172c2l64i4', 
+#         'USER': 'qyfkxtnrbxcjaw',
+#         'PASSWORD': '1d1647d87d3db01d458f38397f8947bc046a794239687028d2751f1dfc526c41',
+#         'HOST': 'ec2-54-163-34-107.compute-1.amazonaws.com',
+#         'PORT':  '5432', 
+#                 }
 # }
+
+
+
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.sqlite3',
+         'NAME': BASE_DIR / 'db.sqlite3',
+     }
+ }
 
 
 # Password validation
