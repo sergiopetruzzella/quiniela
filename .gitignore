@@ -1,6 +1,7 @@
 # created by virtualenv automaticallyitt
-bin/ 
+
+/bin/ 
 lib/ 
-quiniela/settings.py
+settings.py
 
 
