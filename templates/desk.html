@@ -3,22 +3,24 @@
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
 <div class="container-flex">
+{% if matches %}
 <a href="/schedule/view" class="btn text-gold bg-red btn-lg m-5">Ver mi Quiniela</a>
+{% endif %}
 <a href="/schedule/create" class="btn text-gold bg-red btn-lg m-5">Crear Quiniela</a>
+
 </div>
 
-
+{% if matches %}
 <div class="p-3 mt-3">
 <h2>Proximos partidos</h2>
 <hr class="mb-5">
 {% include "schedule/schedule-window.html" %}
-<div class="form-group row pt-3" >
-    <div class="col-4" ></div>
-    <a href="/schedule/edit" class="btn bg-red text-gold btn-lg col-2 m-2">Editar</a>
-    <a href="/schedule/view" class="btn bg-red text-gold btn-lg col-2 m-2">Ver todo</a>
-    <div class="col-4" ></div>
+<div class="d-flex justify-content-center flex-wrap" >
+    <a href="/schedule/edit" class="btn bg-red text-gold btn-lg m-2" style="width:280px">Editar</a>
+    <a href="/schedule/view" class="btn bg-red text-gold btn-lg m-2" style="width:280px">Ver todo</a>
   </div>
 </div>
+{% endif %}
 
 <div class="p-3 mt-3">
 <h2> Tabla General</h2>
