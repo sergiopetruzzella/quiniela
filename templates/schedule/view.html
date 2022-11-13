@@ -7,29 +7,17 @@
 
 </div>
 
-<div  class="align-items-center">
-
-{% for x in list %}
-<div class="form-group row" >
-   <label for="" class="col-4 col-form-label text-end">{{x.local}} {{x.lf}}</label> 
-   <div class="col-2">
-        <label class="form-control border-red" style="height: 2em">{{x.local_score}}</label>
-    </div>
-    <div class="col-2">
-        <label class="form-control border-red" style="height: 2em">{{x.visitor_score}}</label>
-    </div>
-   
-   <label class="col-4 col-form-label text-start" for="">{{x.vf}} {{x.visitor}}</label>
-</div>
-{% endfor %}
-
+{% include "schedule/schedule-window.html" %}
 <div class="form-group row pt-3" >
-<div class="col-4" ></div>
-<a href="/desk" class="btn bg-red text-gold btn-lg col-2 m-2">Editar</a>
-<a href="/schedule/edit" class="btn bg-red text-gold btn-lg col-2 m-2">Regresar</a>
-<div class="col-4" ></div>
+  <div class="col-4" ></div>
+  <a href="/schedule/edit" class="btn bg-red text-gold btn-lg col-2 m-2">Editar</a>
+  <a href="/desk" class="btn bg-red text-gold btn-lg col-2 m-2">Regresar</a>
+  <div class="col-4" ></div>
 </div>
-</div>
+
+
+
+
 
 
 <style> 

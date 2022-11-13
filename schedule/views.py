@@ -144,8 +144,6 @@ def schedule_view_selections(request):
                 "visitor_score": i.visitor_score,
                 "lf" : flags[i.local], 
                 "vf" : flags[i.visitor],
-
-
             }
             match_schedule.append(match)
         except:
@@ -154,7 +152,7 @@ def schedule_view_selections(request):
         
 
     context = {
-        "list" : match_schedule
+        "matches" : match_schedule
     }
 
     

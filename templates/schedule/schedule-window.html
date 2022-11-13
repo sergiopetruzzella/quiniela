@@ -1,0 +1,18 @@
+
+<div  class="align-items-center">
+
+    {% for x in matches %}
+    <div class="form-group row" >
+       <label for="" class="col-4 col-form-label text-end">{{x.local}} {{x.lf}}</label> 
+       <div class="col-2">
+            <label class="form-control border-red" style="height: 2em">{{x.local_score}}</label>
+        </div>
+        <div class="col-2">
+            <label class="form-control border-red" style="height: 2em">{{x.visitor_score}}</label>
+        </div>
+       
+       <label class="col-4 col-form-label text-start" for="">{{x.vf}} {{x.visitor}}</label>
+    </div>
+    {% endfor %}
+    
+    </div>
