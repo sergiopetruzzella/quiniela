@@ -34,67 +34,61 @@ flags = {
         "Tunez": "\U0001f1f9\U0001f1f3",  
         "USA": "\U0001f1fa\U0001f1f8",
         "Uruguay": "\U0001f1fa\U0001f1fe",
-        
-
-
-
         }
+
+match_schedule = [  {"id":"1",  "local" : "Catar"      , "visitor" : "Ecuador"},
+                    {"id":"2",  "local" : "Senegal"    , "visitor" : "Holanda"},
+                    {"id":"3",  "local" : "Inglaterra" , "visitor" : "Iran"},
+                    {"id":"4",  "local" : "USA"        , "visitor" : "Gales"},
+                    {"id":"5",  "local" : "Francia"    , "visitor" : "Australia"},
+                    {"id":"6",  "local" : "Dinamarca"  , "visitor" : "Tunez"},
+                    {"id":"7",  "local" : "Mexico"     , "visitor" : "Polonia"},
+                    {"id":"8",  "local" : "Argentina"  , "visitor" : "Arabia Saudita"},
+                    {"id":"9",  "local" : "Belgica"    , "visitor" : "Canada"},
+                    {"id":"10",  "local" : "Espana"     , "visitor" : "Costa Rica"},
+                    {"id":"11",  "local" : "Alemania"    , "visitor": "Japon"},
+                    {"id":"12",  "local" : "Marruecos"  , "visitor" : "Croacia"},
+                    {"id":"13",  "local" : "Suiza"      , "visitor" : "Camerun"},
+                    {"id":"14",  "local" : "Uruguay"    , "visitor" : "Corea"},
+                    {"id":"15",  "local" : "Portugal"   , "visitor" : "Ghana"},
+                    {"id":"16",  "local" : "Brasil"     , "visitor" : "Serbia"},
+                    {"id":"17",  "local" : "Gales"      , "visitor": "Iran"},
+                    {"id":"18",  "local" : "Catar"      , "visitor" : "Senegal"},
+                    {"id":"19",  "local" : "Holanda"    , "visitor" : "Ecuador"},
+                    {"id":"20",  "local" : "Inglaterra" , "visitor" : "USA"},
+                    {"id":"21",  "local" : "Tunez"      , "visitor" : "Australia"},
+                    {"id":"22",  "local" : "Polonia"    , "visitor" : "Arabia Saudita"},
+                    {"id":"23",  "local" : "Francia"    , "visitor" : "Dinamarca"  },
+                    {"id":"24",  "local" : "Argentina"     , "visitor" : "Mexico"},
+                    {"id":"25",  "local" : "Japon"      , "visitor": "Costa Rica"},
+                    {"id":"26",  "local" : "Belgica"      , "visitor" : "Marruecos"},
+                    {"id":"27",  "local" : "Croacia"    , "visitor" : "Canada"},
+                    {"id":"28",  "local" : "Espana"      , "visitor" : "Alemania"},
+                    {"id":"29",  "local" : "Camerun"    , "visitor" : "Serbia"},
+                    {"id":"30",  "local" : "Corea"    , "visitor" : "Ghana"  },
+                    {"id":"31",  "local" : "Brasil"     , "visitor" : "Suiza"},
+                    {"id":"32",  "local" : "Portugal"      , "visitor": "Uruguay"},
+                    {"id":"33",  "local" : "Gales"      , "visitor" : "Inglaterra"},
+                    {"id":"34",  "local" : "Iran"    , "visitor" : "USA"},
+                    {"id":"35",  "local" : "Ecuador" , "visitor" : "Senegal"},
+                    {"id":"36",  "local" : "Holanda" , "visitor" : "Catar"  },
+                    {"id":"37",  "local" : "Australia"      , "visitor" : "Dinamarca"},
+                    {"id":"38",  "local" : "Tunez"    , "visitor" : "Francia"},
+                    {"id":"39",  "local" : "Polonia"    , "visitor" : "Argentina"  },
+                    {"id":"40",  "local" : "Arabia Saudita"      , "visitor" : "Mexico"},
+                    {"id":"41",  "local" : "Croacia"    , "visitor" : "Belgica"},
+                    {"id":"42",  "local" : "Canada"    , "visitor" : "Marruecos"  },
+                    {"id":"43",  "local" : "Japon"      , "visitor" : "Espana"},
+                    {"id":"44",  "local" : "Costa Rica"    , "visitor" : "Alemania"},
+                    {"id":"45",  "local" : "Ghana"    , "visitor" : "Uruguay"  },
+                    {"id":"46",  "local" : "Corea"      , "visitor" : "Portugal"},
+                    {"id":"47",  "local" : "Serbia"    , "visitor" : "Suiza"},
+                    {"id":"48",  "local" : "Camerun"    , "visitor" : "Brasil"  },
+    ]
 
 # Create your views here.
 def schedule_create_view(request):
-    
-    match_schedule = [{"id":"1",  "local" : "Catar"      , "visitor" : "Ecuador"},
-                      {"id":"2",  "local" : "Senegal"    , "visitor" : "Holanda"},
-                      {"id":"3",  "local" : "Inglaterra" , "visitor" : "Iran"},
-                      {"id":"4",  "local" : "USA"        , "visitor" : "Gales"},
-                      {"id":"5",  "local" : "Francia"    , "visitor" : "Australia"},
-                      {"id":"6",  "local" : "Dinamarca"  , "visitor" : "Tunez"},
-                      {"id":"7",  "local" : "Mexico"     , "visitor" : "Polonia"},
-                      {"id":"8",  "local" : "Argentina"  , "visitor" : "Arabia Saudita"},
-                      {"id":"9 ",  "local" : "Belgica"    , "visitor" : "Canada"},
-                      {"id":"10",  "local" : "Espana"     , "visitor" : "Costa Rica"},
-                      {"id":"11",  "local" : "Alemania"    , "visitor": "Japon"},
-                      {"id":"12",  "local" : "Marruecos"  , "visitor" : "Croacia"},
-                      {"id":"13",  "local" : "Suiza"      , "visitor" : "Camerun"},
-                      {"id":"14",  "local" : "Uruguay"    , "visitor" : "Corea"},
-                      {"id":"15",  "local" : "Portugal"   , "visitor" : "Ghana"},
-                      {"id":"16",  "local" : "Brasil"     , "visitor" : "Serbia"},
-                      {"id":"17",  "local" : "Gales"      , "visitor": "Iran"},
-                      {"id":"18",  "local" : "Catar"      , "visitor" : "Senegal"},
-                      {"id":"19",  "local" : "Holanda"    , "visitor" : "Ecuador"},
-                      {"id":"20",  "local" : "Inglaterra" , "visitor" : "USA"},
-                      {"id":"21",  "local" : "Tunez"      , "visitor" : "Australia"},
-                      {"id":"22",  "local" : "Polonia"    , "visitor" : "Arabia Saudita"},
-                      {"id":"23",  "local" : "Francia"    , "visitor" : "Dinamarca"  },
-                      {"id":"24",  "local" : "Argentina"     , "visitor" : "Mexico"},
-                      {"id":"25",  "local" : "Japon"      , "visitor": "Costa Rica"},
-                      {"id":"26",  "local" : "Belgica"      , "visitor" : "Marruecos"},
-                      {"id":"27",  "local" : "Croacia"    , "visitor" : "Canada"},
-                      {"id":"28",  "local" : "Espana"      , "visitor" : "Alemania"},
-                      {"id":"29",  "local" : "Camerun"    , "visitor" : "Serbia"},
-                      {"id":"30",  "local" : "Corea"    , "visitor" : "Ghana"  },
-                      {"id":"31",  "local" : "Brasil"     , "visitor" : "Suiza"},
-                      {"id":"32",  "local" : "Portugal"      , "visitor": "Uruguay"},
-                      {"id":"33",  "local" : "Gales"      , "visitor" : "Inglaterra"},
-                      {"id":"34",  "local" : "Iran"    , "visitor" : "USA"},
-                      {"id":"35",  "local" : "Ecuador" , "visitor" : "Senegal"},
-                      {"id":"36",  "local" : "Holanda" , "visitor" : "Catar"  },
-                      {"id":"37",  "local" : "Australia"      , "visitor" : "Dinamarca"},
-                      {"id":"38",  "local" : "Tunez"    , "visitor" : "Francia"},
-                      {"id":"39",  "local" : "Polonia"    , "visitor" : "Argentina"  },
-                      {"id":"40",  "local" : "Arabia Saudita"      , "visitor" : "Mexico"},
-                      {"id":"41",  "local" : "Croacia"    , "visitor" : "Belgica"},
-                      {"id":"42",  "local" : "Canada"    , "visitor" : "Marruecos"  },
-                      {"id":"43",  "local" : "Japon"      , "visitor" : "Espana"},
-                      {"id":"44",  "local" : "Costa Rica"    , "visitor" : "Alemania"},
-                      {"id":"45",  "local" : "Ghana"    , "visitor" : "Uruguay"  },
-                      {"id":"46",  "local" : "Corea"      , "visitor" : "Portugal"},
-                      {"id":"47",  "local" : "Serbia"    , "visitor" : "Suiza"},
-                      {"id":"48",  "local" : "Camerun"    , "visitor" : "Brasil"  },
-    ]
-
-    
-
+   
     for i in match_schedule:
         try:
             i["lf"] = flags[i['local']] 
@@ -106,12 +100,11 @@ def schedule_create_view(request):
             pass
         
 
-
     if request.method == "POST":
         print (request.POST)
 
         Match.objects.filter(user_id=request.user.id).delete()
-
+        print('bien aca')
         for x in match_schedule:
             game = Match.objects.create(
                 local=x["local"], 
@@ -134,7 +127,7 @@ def schedule_create_view(request):
     
 def schedule_view_selections(request):
     u_sch = Match.objects.filter(user_id = request.user.id)
-    match_schedule= []
+    match_sch= []
     for i in u_sch:
         try:
             match = {
@@ -145,19 +138,39 @@ def schedule_view_selections(request):
                 "lf" : flags[i.local], 
                 "vf" : flags[i.visitor],
             }
-            match_schedule.append(match)
+            match_sch.append(match)
+        except:
+            pass   
+
+    context = {
+        "matches" : match_sch
+    }
+
+    return render(request, 'schedule/view.html', context)
+
+
+    
+def schedule_edit_selections (request):
+    u_sch = Match.objects.filter(user_id = request.user.id)
+    match_sch= []
+    for i in u_sch:
+        try:
+            match = {
+                "local" : i.local ,  
+                "visitor" : i.visitor  , 
+                "local_score": i.local_score,
+                "visitor_score": i.visitor_score,
+                "lf" : flags[i.local], 
+                "vf" : flags[i.visitor],
+                "id" : i.match_number
+            }
+            match_sch.append(match)
         except:
             pass
 
-        
-
     context = {
-        "matches" : match_schedule
+        "matches" : match_sch
     }
 
-    
-
-  
-    return render(request, 'schedule/view.html', context)
-
+    return render(request, 'schedule/edit.html', context)
     

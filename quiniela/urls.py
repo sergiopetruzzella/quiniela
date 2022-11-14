@@ -32,6 +32,9 @@ urlpatterns = [
 
     path('schedule/create/', schedule_views.schedule_create_view),
     path('schedule/view/', schedule_views.schedule_view_selections),
+    path('schedule/edit/', schedule_views.schedule_edit_selections),
+
+
 
     
     path('manage/', admin_manage_view),

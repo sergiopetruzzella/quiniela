@@ -1,0 +1,50 @@
+{%extends 'base.html' %}
+{%block content%}
+<div class="container row align-items-center p-3">
+    
+<h1 class="text-center"> Crear Quiniela</h1>
+
+</div>
+<form action="/schedule/create/" class="align-items-center" method="POST">
+    {% csrf_token %}
+
+{% for x in matches %}
+<div class="form-group row" >
+   <label for="" class="col-4 col-form-label text-end">{{x.local}} {{x.lf}}</label> 
+   <div class="col-2">
+        <input class="col-2 form-control border-red" type="number" value="{{x.local_score}}" required max="9" min="0" name="local{{x.id}}"  style="height: 2em">
+    </div>
+    <div class="col-2">
+   <input class="form-control border-red" type="number" value="{{x.visitor_score}}" required max="9" min="0" name="visitor{{x.id}}" style="height: 2em">
+    </div>
+   
+   <label class="col-4 col-form-label text-start" for="">{{x.vf}} {{x.visitor}}   </label>
+</div>
+{% endfor %}
+<div class="form-group row pt-3" >
+<div class="col-4" ></div>
+<button type="submit" class="btn bg-red text-gold btn-lg col-4 ">Enviar Quiniela</button>
+<div class="col-4" ></div>
+</div>
+</form>
+
+
+<style> 
+@media (max-width: 600px) {
+    .col-form-label, .form-control {
+      font-size: 0.9rem;
+    }}
+
+    @media (max-width: 600px) {
+    .col-2, .col-form-label {
+      padding: 2px 4px;}
+    }
+
+
+
+    @media (max-width: 450px) {
+    .col-form-label, .form-control {
+      font-size: 0.9rem;
+    }
+  } </style>
+{% endblock %}
