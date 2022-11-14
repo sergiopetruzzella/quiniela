@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block  content%}
+
+
+<h3 style="color: #49b800 ">Usted fue incluido en el grupo </h3>
+
+<hr>
+<h2>{{group}}</h2>
+
+<h4> Lista de ususarios</h4>
+<ul>
+{%for x in users%}
+{{x}}
+{% endfor %}
+</ul>
+
+{%endblock%}

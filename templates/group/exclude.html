@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block  content%}
+{% if group %}
+<h3 >Usted se ha retirado correctamente del grupo {{group}}</h3>
+<hr>
+{%else%}
+<h3> Grupo no encontrado </h3>
+{% endif %}
+
+<a href="/group/manage" class="btn btn-lg bg-red text-gold">Regresar</a>
+
+{%endblock%}

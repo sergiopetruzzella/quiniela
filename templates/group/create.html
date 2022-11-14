@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block  content%}
+
+{%if created%}
+   <h3 style="color: #49b800  ">Grupo Creado Correctamente</h3>
+{%else%}
+   <h3 style="color: #b80000  ">Este grupo fue crado anteriormente</h3>
+{%endif%}
+<hr>
+<h2>{{group}}</h2>
+
+<h4> Lista de ususarios</h4>
+<ul>
+{%for x in users%}
+{{x}}
+{% endfor %}
+</ul>
+
+
+{% endblock %}

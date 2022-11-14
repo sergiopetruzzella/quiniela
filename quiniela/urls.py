@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from accounts import views as accounts_views
 from schedule import views as schedule_views
+from group import views as group_views
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -33,6 +34,14 @@ urlpatterns = [
     path('schedule/create/', schedule_views.schedule_create_view),
     path('schedule/view/', schedule_views.schedule_view_selections),
     path('schedule/edit/', schedule_views.schedule_edit_selections),
+
+    path('group/create/', group_views.group_create_view),
+    path('group/manage/', group_views.group_manage_view),
+    path('group/include/', group_views.group_include_view),
+    path('group/exclude/', group_views.group_exclude_view),
+
+
+
 
 
 
