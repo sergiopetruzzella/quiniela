@@ -80,10 +80,10 @@ WSGI_APPLICATION = 'quiniela.wsgi.application'
 DATABASES = {
      'default': {
          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-         'NAME': 'ddce172c2l64i4', 
-         'USER': 'qyfkxtnrbxcjaw',
-         'PASSWORD': '1d1647d87d3db01d458f38397f8947bc046a794239687028d2751f1dfc526c41',
-         'HOST': 'ec2-54-163-34-107.compute-1.amazonaws.com',
+         'NAME': 'd9stns0f5t0b2a', 
+         'USER': 'bavpicqqtdscty',
+         'PASSWORD': 'ddcbef4fe0ee251f16c3facf4395009fb630c84c43b77e51b38ccc87a783ccf9',
+         'HOST': 'ec2-52-70-86-157.compute-1.amazonaws.com',
          'PORT':  '5432', 
                  }
  }
@@ -153,5 +153,5 @@ STATICFILES_DIRS = [
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# import dj_database_url
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
