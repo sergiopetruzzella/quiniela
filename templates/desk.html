@@ -5,14 +5,14 @@
 {% if matches %}
 <p>Solo puedes tener llenar una quiniela, en "sobreescribir quiniela" crearas una desde cero pero se borrara tu quiniela anterior</p>
 {% else %}
-<p>Ve a crear quiniela para comenzar</p>
+<p>Click en "crear quiniela" para comenzar</p>
 {% endif %}
 
 <div class="container-flex mb-5">
 {% if matches %}
-<a href="/schedule/view" class="btn text-gold bg-red btn-lg mx-4">Ver mi Quiniela</a>
-<a href="/schedule/edit" class="btn text-gold bg-red btn-lg mx-4">Editar mi Quiniela</a>
-<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4">Sobreescribir Quiniela</a>
+<a href="/schedule/view" class="btn text-gold bg-red btn-lg mx-4 my-1">Ver mi Quiniela</a>
+<a href="/schedule/edit" class="btn text-gold bg-red btn-lg mx-4 my-1">Editar mi Quiniela</a>
+<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4 my-1">Sobreescribir Quiniela</a>
 {% else %}
 <a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4">Crear Quiniela</a>
 {% endif %}
@@ -35,6 +35,12 @@
   <h2>Grupos</h2>
   <hr class="mb-2">
   <a href="/group/manage" class="btn text-gold bg-red btn-lg m-5">Administrar mis Grupos</a>
+  
+  {% if not user_groups %}
+  <p class="m-3">Aún no estás en ningún grupo. Click en “administrar mis grupos” para incluirte en uno</p>
+  {%endif%}
+
+
   {% for x in user_groups %}     
   <div class="p-3">
     <h4>Tabla del grupo {{x}}</h4>

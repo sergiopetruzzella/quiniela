@@ -1,16 +1,34 @@
 {%extends 'base-home.html' %}
 {%block content%}
 <div class="d-flex justify-content-center h-100 align-items-center" >
-<div class="card text-center p-4">
+<div class="card text-center p-2">
     <div class="card-body align-items-center" >
-    <h5 class="card-title">QUINIELA</h5>
+    <h5 class="card-title mb-4">QUINIELA</h5>
 {% if request.user.is_authenticated %}
-    <p class="card-text">el usuario esta registrado</p>
-    <a class="btn text-gold bg-red" href="/desk">Iniciar</a>
+    <p class="card-text">Bienvenido {{request.user}}</p>
+    <a class="btn text-gold bg-red" href="/desk">Entrar</a>
 {% else %}
-    <p class="card-text"> el usuario NO esta registarado</p>
-    <a href="/login" class="btn text-gold bg-red">iniciar sesion</a>
-    <a href="/register" class="btn text-gold bg-red">crear cuenta</a>   
+<form action="/login/" method="POST">
+    {% csrf_token %}
+<!-- Email input -->
+<div class="form-outline mb-3">
+<input type="text" id="form2Example1" class="form-control" name="username" required/>
+<label class="form-label" for="form2Example1" >Nombre de Usuario</label>
+</div>
+
+<!-- Password input -->
+<div class="form-outline mb-3">
+<input type="password" id="form2Example2" class="form-control" name="password"/>
+<label class="form-label" for="form2Example2">Clave</label>
+</div> 
+<!-- Submit button -->
+<button type="submit" class="btn text-gold bg-red btn-block w-100 mb-4">Entrar</button>
+
+<!-- Register buttons -->
+<div class="text-center">
+<p>No estas registrado? <a href="../register">Resgistrarse</a></p>
+</div>
+</form>
    
 {% endif %}
 </div>
