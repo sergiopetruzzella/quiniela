@@ -3,26 +3,35 @@
 {% if not request.user.is_authenticated  %}
 <div class="d-flex justify-content-center h-100 align-items-center" >
     <div class="card text-center p-4">
-        <h2 class="mb-3"> Iniciar Sesion </h2>
+        <h2 class="mb-2"> Registrar </h2>
     <form action="." method="POST">
         {% csrf_token %}
 
-        <div class="form-outline mb-3">
-            <input type="text" id="form2Example1" class="form-control" name="username" required/>
-            <label class="form-label" for="form2Example1" ">Nombre de Usuario</label>
+        <div class="text-start mb-2">
+          <label class="form-label" for="form2Example1">Nombre de Usuario</label>
+          <input type="text" id="form2Example1" class="form-control" name="username" required/>
           </div>
 
-          <div class="form-outline mb-3">
-            <input type="password" id="form2Example2" class="form-control" name="password"/>
+          <div class="text-start mb-2">
             <label class="form-label" for="form2Example2">Clave</label>
+            <input type="password" id="form2Example2" class="form-control" name="password"/>
           </div> 
 
-          <div class="form-outline mb-3">
-            <input type="password" id="form2Example2" class="form-control" name="password2"/>
+          <div class="text-start mb-2">
             <label class="form-label" for="form2Example2">Repetir Clave</label>
+            <input type="password" id="form2Example2" class="form-control" name="password2"/>
           </div> 
-        
-          <button type="submit" class="btn text-gold bg-red btn-block mb-4">Entrar</button>
+          <div class="text-start mb-2">
+          <label class="form-label" for="form2Example2">Instagram (opcional)</label>
+          <div class="input-group mb-1">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+          </div>
+          <p><small>*Público. Para mostrarse en la tabla de posiciones</small></p>
+        </div>
+        <button type="submit" class="btn text-gold bg-red w-100 mt-3 mb-3">Entrar</button>
     </form>
     {% else %}
     <h3> Usted ya se encuentra registrado</h3>
@@ -39,5 +48,11 @@
 
      </div>
     </div>
+
+    <style>
+      form{
+        font-size:medium
+      }
+    </style>
 
 {% endblock %}
