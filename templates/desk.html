@@ -2,12 +2,20 @@
 {% block content %}
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
-<div class="container-flex">
 {% if matches %}
-<a href="/schedule/view" class="btn text-gold bg-red btn-lg m-5">Ver mi Quiniela</a>
+<p>Solo puedes tener llenar una quiniela, en "sobreescribir quiniela" crearas una desde cero pero se borrara tu quiniela anterior</p>
+{% else %}
+<p>Ve a crear quiniela para comenzar</p>
 {% endif %}
-<a href="/schedule/create" class="btn text-gold bg-red btn-lg m-5">Crear Quiniela</a>
 
+<div class="container-flex mb-5">
+{% if matches %}
+<a href="/schedule/view" class="btn text-gold bg-red btn-lg mx-4">Ver mi Quiniela</a>
+<a href="/schedule/edit" class="btn text-gold bg-red btn-lg mx-4">Editar mi Quiniela</a>
+<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4">Sobreescribir Quiniela</a>
+{% else %}
+<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4">Crear Quiniela</a>
+{% endif %}
 </div>
 
 {% if matches %}
@@ -39,7 +47,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for y in x.user_set.all %}
+          {% for y in x.user_set.all|dictsortreversed:"userscore.points" %}
   <tr>
       <th scope="row">{{forloop.counter}}</th>
       <td>{{y}}</td>
