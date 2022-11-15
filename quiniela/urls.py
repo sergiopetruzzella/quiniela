@@ -34,6 +34,8 @@ urlpatterns = [
     path('schedule/create/', schedule_views.schedule_create_view),
     path('schedule/view/', schedule_views.schedule_view_selections),
     path('schedule/edit/', schedule_views.schedule_edit_selections),
+    path('schedule/group-board/', schedule_views.schedule_group_board_selections),
+
 
     path('group/create/', group_views.group_create_view),
     path('group/manage/', group_views.group_manage_view),

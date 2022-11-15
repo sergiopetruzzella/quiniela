@@ -1,12 +1,12 @@
 {%extends 'base-home.html' %}
 {%block content%}
 <div class="d-flex justify-content-center h-100 align-items-center" >
-<div class="card text-center p-2">
+<div class="card text-center p-2" style="min-width: 300px;">
     <div class="card-body align-items-center" >
     <h5 class="card-title mb-4">QUINIELA</h5>
 {% if request.user.is_authenticated %}
-    <p class="card-text">Bienvenido {{request.user}}</p>
-    <a class="btn text-gold bg-red" href="/desk">Entrar</a>
+    <p class="card-text my-4">Bienvenido {{request.user}}</p>
+    <a class="btn text-gold bg-red w-100" href="/desk">Entrar</a>
 {% else %}
 <form action="/login/" method="POST">
     {% csrf_token %}
