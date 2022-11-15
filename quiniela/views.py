@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 import sys
 from schedule.models import RealScore, Match, UserScore
 
@@ -45,7 +45,10 @@ def home_view (request):
     return  render(request, 'home-view.html', {})
 
 def desk_view (request):
-    users_scores = UserScore.objects.order_by("-points")
+    user = request.user 
+    user_groups = user.groups.all()
+
+    users_scores = UserScore.objects.order_by("-points")[:10]
     n_mts = Match.objects.filter(user_id = request.user.id)[:10]
     next_matches = []
     for i in n_mts:
@@ -65,7 +68,8 @@ def desk_view (request):
     
     
     context = {"list": users_scores,
-                "matches": next_matches
+                "matches": next_matches,
+                "user_groups": user_groups,
                 }
     
 

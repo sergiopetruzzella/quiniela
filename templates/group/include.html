@@ -1,17 +1,20 @@
 {% extends "base.html" %}
 {% block  content%}
 
-
+<div class="p-3">
 <h3 style="color: #49b800 ">Usted fue incluido en el grupo </h3>
 
 <hr>
-<h2>{{group}}</h2>
+<h2 class="p-3">Grupo: {{group}}</h2>
 
-<h4> Lista de ususarios</h4>
+<h4 classs="p-2"> Lista de ususarios</h4>
 <ul>
 {%for x in users%}
-{{x}}
+<li>{{x}}</li>
 {% endfor %}
 </ul>
+<a href="/group/manage" class="btn btn-lg bg-red text-gold m-3">Regresar</a>
+</div>
+
 
 {%endblock%}

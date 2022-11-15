@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.shortcuts import render , redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from schedule.models import UserScore
 # Create your views here.
 
 def login_view (request):
@@ -37,6 +38,8 @@ def register_view (request):
         
               u.set_password(userPass)
               u.save()
+              UserScore.objects.create(user=u,points=0)
+
               return render(request,  'accounts/register.html', {"m": "Fue creado exitosamente", "c":"green"}) 
            else:
               return render(request,  'accounts/register.html', {"m": "El usuario existe", "c":"red"})

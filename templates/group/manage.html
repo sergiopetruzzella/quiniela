@@ -6,9 +6,29 @@
     <h3> Mis Grupos</h3>
     <hr> 
     <div class="container-xl px-1">
+        {%if user_groups %}
+        
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Grupo</th>
+                </tr>
+              </thead>
+              <tbody>
         {%for x in user_groups%}
-        {{x}} - 
-        {%endfor%}
+        
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{x}}</td>           
+          </tr>
+        {% endfor %}        
+
+    </tbody>
+</table>
+        {%else%}
+        Usted aun no se encuentra en ningun grupo
+        {%endif%}
     </div>
     </div>
 
@@ -20,8 +40,8 @@
         <form class="form-inline" method="POST" action="/group/include/">
             {% csrf_token %}
 
-        <select class="form-select" aria-label="Default select example" name="group_name">
-            <option selected>Open this select menu</option>
+        <select required class="form-select" aria-label="Default select example" name="group_name">
+            <option disabled>Seleccione un grupo</option>
             {% for x in groups %}
             <option value="{{x}}">{{x}}</option>
             {% endfor %}
@@ -44,7 +64,7 @@
     {% csrf_token %}
 
     <label class="m-2" for="group_name">Nombre del grupo</label>
-    <input type="text" class="form-control mb-2 mr-sm-2" id="group_name" name="group_name"  placeholder="Introduzca nombre del grupo">
+    <input type="text" class="form-control mb-2 mr-sm-2" id="group_name" name="group_name"  placeholder="Introduzca nombre del grupo" required>
       
     <div class="custom-control custom-checkbox m-2 mr-sm-2">
       <input type="checkbox" class="custom-control-input" id="include" name="include">
@@ -66,7 +86,7 @@
             {% csrf_token %}
 
         <select class="form-select" aria-label="Default select example" name="group_name">
-            <option selected>elegir grupo</option>
+            <option disabled>elegir grupo</option>
             {% for x in user_groups %}
             <option value="{{x}}">{{x}}</option>
             {% endfor %}
@@ -83,9 +103,27 @@
     <h3> Otro Grupos</h3>
     <hr> 
     <div class="container-xl px-1">
+        {%if groups %}
+        
+        <table class="table table-sm table-striped table-bordered">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Grupo</th>
+                </tr>
+              </thead>
+              <tbody>
         {%for x in groups%}
-        {{x}} - 
-        {%endfor%}
+        
+        <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{x}}</td>           
+          </tr>
+        {% endfor %}        
+
+    </tbody>
+</table>
+{%endif%}
     </div>
 </div>
 </div>
@@ -94,6 +132,4 @@
         margin-top: 0;
     }
 </style>
-
-
 {% endblock %}

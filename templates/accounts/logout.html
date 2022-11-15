@@ -1,11 +1,16 @@
+{%extends "base.html"%}
+
+
+{% block content%}
 {% if request.user.is_authenticated  %}
-<div  style="margin-top: 30px">
+<div class="p-5">
     <form action="." method="POST">
         {% csrf_token %}
-        <p>Seguro que deseas cerras Sesion</p>
-        <button type="submit">Si ,  cerrar sesion </button>
+        <h3>Seguro que deseas cerras Sesion?</h3>
+        <button class="btn bg-red text-gold" type="submit">Si ,  cerrar sesion </button>
     </form>
 </div>
 {% else %}
 <h4>No has iniciado sesion aun <a href="/login/">Inciar Sesion</a> </h4>
 {% endif %}
+{% endblock %}

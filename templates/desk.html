@@ -25,12 +25,32 @@
 
 <div class="p-3 mt-3">
   <h2>Grupos</h2>
-  <hr class="mb-5">
+  <hr class="mb-2">
   <a href="/group/manage" class="btn text-gold bg-red btn-lg m-5">Administrar mis Grupos</a>
-
-
-  
+  {% for x in user_groups %}     
+  <div class="p-3">
+    <h4>Tabla del grupo {{x}}</h4>
+    <table class="table table-striped table-bordered">
+      <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Puntaje</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for y in x.user_set.all %}
+  <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td>{{y}}</td>
+      <td>{{y.userscore.points}}</td>
+    </tr>
+    {%endfor%}
+        </tbody>
+  </table>
   </div>
+  {%endfor%}
+</div>
 
 
 
@@ -38,7 +58,7 @@
 <h2> Tabla General</h2>
 <hr class="mb-5">
 <div class="p-3">
-{% include "admin/table.html"%}
+{% include "admin/table.html" with list=list%}
 </div>
 </div>
 {% else %}
