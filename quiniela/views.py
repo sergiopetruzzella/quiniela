@@ -48,7 +48,7 @@ def desk_view (request):
     user = request.user 
     user_groups = user.groups.all()
 
-    users_scores = UserScore.objects.order_by("-points")[:10]
+    users_scores = UserScore.objects.order_by("-points")
     n_mts = Match.objects.filter(user_id = request.user.id)[:10]
     next_matches = []
     for i in n_mts:
