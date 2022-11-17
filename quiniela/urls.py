@@ -21,11 +21,13 @@ from group import views as group_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home_view, desk_view, admin_manage_view, generate_points
+from .views import home_view, desk_view, admin_manage_view, generate_points, info_view
 
 urlpatterns = [
     path('',  home_view),
     path('desk/',desk_view ),
+    path('info/',info_view ),
+
 
     path('login/', accounts_views.login_view ),
     path('logout/', accounts_views.logout_view ),
