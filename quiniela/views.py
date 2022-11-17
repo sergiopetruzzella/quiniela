@@ -128,3 +128,8 @@ def generate_points (request):
         UserScore.objects.create(user=x,points=points)
     x = UserScore.objects.order_by("-points")    
     return  render(request, 'admin/table.html', {"list": x})
+
+
+def info_view (request): 
+
+    return render(request, 'info.html', {})

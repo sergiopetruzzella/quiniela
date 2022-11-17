@@ -14,12 +14,24 @@
 </head>
 <body style="height:100%;" >
   <div style="min-height: 70%">
-  
+    
+    
     <nav class="navbar bg-red">
-        <div class="container-fluid">
+        <div class="container-fluid ps-0">
             <div class="d-inline-flex">
-        <a href="/desk"><span class="navbar-brand h1 text-gold">QUINIELA</span></a>
+              <div class="btn-group ps-3 d-sm-none">
+                <a type="button" class="dropdown-toggle text-gold" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    <i class="fa-solid fa-bars text-gold"></i>
+                </a>
+                  <ul class="dropdown-menu rounded-bottom border-top-0 bg-red pe-3">    
+                      <li><a href="/info" class="dropdown-item  text-gold " type="button"><i class="fa fa-circle-info pe-2"></i>REGLAS</a></li>
+                  </ul>
+                </div>
+        <a href="/desk"><span class="navbar-brand h1 text-gold ms-2">QUINIELA</span></a>
           <span class="mt-2 text-gold tx-sm d-none d-sm-block ">By @sergiopetruzzella</span>
+            </div>
+            <div>
+              <a href="/info" class="h6 text-gold d-none d-sm-block mb-0">REGLAS</a>
             </div>
             <div class="btn-group">
                 <a type="button" class="dropdown-toggle text-gold" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
@@ -36,19 +48,9 @@
 
                   </ul>
                 </div>
-        
-              
-
-            
-        
-
-
         </div>
       </nav>
-      <i class="fa-solid fa-user text-gold"></i>
-
-      
-
+    
 
     {%block content%}{% endblock %}
 

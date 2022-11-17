@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<a href="/desk" class="btn btn-lg bg-red text-gold m-4"><i class="fa fa-arrow-left"></i> Regresar al Escritorio</a>
+<div class="ms-3">
+    <H2>Reglas</H2>
+    <ul>
+       <li>Cada usuario puede llenar solo una quiniela</li>
+       <li>Puedes editar tu quiniela hasta antes de empezar el mundial</li>
+       <li>Las quinielas son privadas, nadie puede ver tus selecciones hasta comenzar el evento</li>
+       <li>Una vez comience el mundial las quinielas pasarán a ser públicas, todos podrán ver tus selecciones</li>
+    </ul>
+    <hr>
+    <h3>Puntuación</h3>
+    <div class="ms-3">
+    <h5>Cada partido</h5>
+    <div class="ms-2">
+    <ul>
+       <li>4 puntos por acertar el ganador (o empate) </li>
+       <li>1 punto por comodín</li>
+       <p><small>*El comodín se activa cuando, el ganador (o empate) que predijiste no se dio por un gol</small></p>
+    </ul>
+    <h6>Puntos extras</h6>
+    <ul>
+       <li>1 punto por acertar la cantidad de goles del equipo local</li>
+       <li>1 punto por acertar la cantidad de goles del equipo visitante</li>
+       <li>1 punto por acertar la diferencia de goles</li>
+    </ul>
+    <h5>Puntos al finalizar la fase de grupos</h5>
+    <ul>
+        <li>8 puntos por acertar un equipo clasificado en la posición correcta</li>
+        <li>4 puntos por acertar un equipo clasificado en la posición incorrecta</li>
+    </ul>
+    </div>
+    <h5>Fase final</h5>
+    <p>Se estará anunciando próximamente  el sistema de puntuación para la fase final</p>
+    </div>
+    </div>
+
+{% endblock %}
