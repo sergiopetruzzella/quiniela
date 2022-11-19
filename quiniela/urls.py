@@ -21,7 +21,7 @@ from group import views as group_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home_view, desk_view, admin_manage_view, generate_points, info_view
+from .views import home_view, desk_view, admin_manage_view, generate_points, info_view, user_puntuation
 
 urlpatterns = [
     path('',  home_view),
@@ -43,6 +43,9 @@ urlpatterns = [
     path('group/manage/', group_views.group_manage_view),
     path('group/include/', group_views.group_include_view),
     path('group/exclude/', group_views.group_exclude_view),
+    
+    path('user/<str:user>/',user_puntuation),
+
 
 
 

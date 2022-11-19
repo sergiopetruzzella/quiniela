@@ -100,8 +100,14 @@ def generate_points (request):
         for i in scores:  #recorro cada juego 
             try:
                 us = user_schedule.get(match_number=i.id) #user Score
-                user_result = (-us.local_score + us.visitor_score)/abs(us.local_score - us.visitor_score)
-                real_result = (-i.local_score + i.visitor_score)/abs(i.local_score - i.visitor_score)
+                try:
+                    user_result = (-us.local_score + us.visitor_score)/abs(us.local_score - us.visitor_score)
+                except:
+                    user_result = 0
+                try: 
+                    real_result = (-i.local_score + i.visitor_score)/abs(i.local_score - i.visitor_score)
+                except:
+                    real_result = 0 
                 user_goal_diference = -us.local_score + us.visitor_score
                 real_goal_diference = -i.local_score + i.visitor_score
                 goals_diference_error  = abs(user_goal_diference - real_goal_diference)
@@ -133,3 +139,91 @@ def generate_points (request):
 def info_view (request): 
 
     return render(request, 'info.html', {})
+
+def user_puntuation (request,user):
+    error = None
+    try:
+        username = User.objects.get(username=user)
+        matches  = Match.objects.filter(user_id = username.id)
+        real_scores      = RealScore.objects.all()
+    except User.DoesNotExist:
+        username  = None
+        error = "Usuario no encontrado"
+    data = []
+    if username :
+        for i in matches:
+            try:
+               r_s = real_scores.get(id=i.match_number)
+               try:
+                   real_result = (-r_s.local_score + r_s.visitor_score)/abs(r_s.local_score - r_s.visitor_score)
+               except:
+                   real_result = 0 
+               try: 
+                   user_result = (-i.local_score + i.visitor_score)/abs(i.local_score - i.visitor_score)
+               except:
+                   user_result=0 
+               user_goal_diference = -i.local_score + i.visitor_score
+               real_goal_diference = -r_s.local_score + r_s.visitor_score
+               goals_diference_error  = abs(user_goal_diference - real_goal_diference)
+               points  = 0 
+               print(points)
+               if user_result == real_result : 
+                   points += 4 # 4 puntos por acertar vencedor
+               elif goals_diference_error == 1:
+                   points+= 1  # 1 1 punto de comodin
+
+               if i.local_score == r_s.local_score:
+                   points+= 1 #punto por acertar goles del local
+
+               if i.visitor_score == r_s.visitor_score:
+                   points+= 1 #punto por acertar goles del visitante
+
+               if user_goal_diference == real_goal_diference:
+                   points+= 1 #punto por acertar diferencia de goles
+               data.append({
+                   "local" : i.local ,
+                   "local_flag": flags[i.local],
+                   "local_score": i.local_score,
+                   "visitor": i.visitor,
+                   "visitor_score": i.visitor_score,
+                   "visitor_flag": flags[i.visitor],
+                   "real_local_score"  : r_s.local_score,
+                   "real_visitor_score": r_s.visitor_score, 
+                   "points": points
+
+               })
+            except: 
+                data.append({
+                   "local" : i.local ,
+                   "local_score": i.local_score,
+                   "visitor": i.visitor,
+                   "visitor_score": i.visitor_score,
+                    "local_flag": flags[i.local],
+                    "visitor_flag": flags[i.visitor],
+
+
+               })
+
+        
+        
+        
+            
+    
+
+            
+        
+
+
+
+
+
+
+
+
+
+    context = {"user":username,
+               "data": data
+    
+    }
+    return render(request,  'accounts/puntuation.html', context)
+
