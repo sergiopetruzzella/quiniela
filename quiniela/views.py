@@ -148,8 +148,12 @@ def info_view (request):
 def user_puntuation (request,user):
     error = None
     try:
-        username = User.objects.get(username=user)
-        matches  = Match.objects.filter(user_id = username.id)
+        try:
+            username = User.objects.get(username=user)
+        except:
+            slug = user +" "
+            username = User.objects.get(username=slug)
+        matches  = Match.objects.filter(user_id = username.id)  
         real_scores      = RealScore.objects.all()
     except User.DoesNotExist:
         username  = None
@@ -208,22 +212,6 @@ def user_puntuation (request,user):
 
 
                })
-
-        
-        
-        
-            
-    
-
-            
-        
-
-
-
-
-
-
-
 
 
     context = {"user":username,
