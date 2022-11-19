@@ -132,8 +132,13 @@ def generate_points (request):
         except:
             pass
         UserScore.objects.create(user=x,points=points)
-    x = UserScore.objects.order_by("-points")    
-    return  render(request, 'admin/table.html', {"list": x})
+    x = UserScore.objects.order_by("-points") 
+    data =[]
+    for i in x :
+        user_match_count = Match.objects.filter(user_id= i.user.id).count()
+        data.append({"points": i.points, "user": i.user.username, "count" : user_match_count})
+       
+    return  render(request, 'admin/ado-table.html', {"list": data})
 
 
 def info_view (request): 

@@ -1,0 +1,26 @@
+<h3>Tabla</h3>
+
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Puntaje</th>
+          <th scope="col">cuenta</th>
+        </tr>
+      </thead>
+      <tbody>
+{% for x in list %}
+
+<tr>
+    <th scope="row">{{forloop.counter}}</th>
+    <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.user}}</a></td>
+    <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.points}}</a></td>
+    <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.count}}</a></td>
+    <td>{{x.points}}</td>
+   
+  </tr>
+{% endfor %}
+      </tbody>
+</table>
+
