@@ -3,19 +3,17 @@
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
 {% if matches %}
-<p>Solo puedes tener llenar una quiniela, en "sobreescribir quiniela" crearas una desde cero pero se borrara tu quiniela anterior</p>
+<p>Ya no puedes editar tu quiniela de la fase de grupos, en los proximos dias estaremos dando información sobre la quiniela en la fase final</p>
 {% else %}
-<p>Click en "crear quiniela" para comenzar</p>
 {% endif %}
 
 <div class="container-flex mb-5">
 {% if matches %}
 <a href="/schedule/group-board" class="btn text-gold bg-red btn-lg mx-4 my-1">Mi pizarra de grupos</a>
+<a href="/user/{{request.user.username}}" class="btn text-gold bg-red btn-lg mx-4 my-1">Mi puntuación detallada</a>
 <a href="/schedule/view" class="btn text-gold bg-red btn-lg mx-4 my-1">Ver mi Quiniela</a>
-<a href="/schedule/edit" class="btn text-gold bg-red btn-lg mx-4 my-1">Editar mi Quiniela</a>
-<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4 my-1">Sobreescribir Quiniela</a>
 {% else %}
-<a href="/schedule/create" class="btn text-gold bg-red btn-lg mx-4">Crear Quiniela</a>
+<h3>Expiró el plazo para crear tu quiniela para la fase de grupos</h3>
 {% endif %}
 </div>
 
@@ -25,7 +23,6 @@
 <hr class="mb-5">
 {% include "schedule/schedule-window.html" %}
 <div class="d-flex justify-content-center flex-wrap" >
-    <a href="/schedule/edit" class="btn bg-red text-gold btn-lg m-2" style="width:280px">Editar</a>
     <a href="/schedule/view" class="btn bg-red text-gold btn-lg m-2" style="width:280px">Ver todo</a>
   </div>
 </div>
