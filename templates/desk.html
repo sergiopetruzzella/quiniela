@@ -54,7 +54,7 @@
           {% for y in x.user_set.all|dictsortreversed:"userscore.points" %}
   <tr>
       <th scope="row">{{forloop.counter}}</th>
-      <td>{{y}}</td>
+      <td><a href="/user/{{y}}" style="color: #1744ad">{{y}}</a></td>
       <td>{{y.userscore.points}}</td>
     </tr>
     {%endfor%}
