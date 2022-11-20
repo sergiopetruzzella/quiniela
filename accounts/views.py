@@ -57,3 +57,10 @@ def register_view (request):
 
     return render(request,  'accounts/register.html', {"r": ''})
 
+
+def change_view (request):
+    if request.method == "POST":
+        logout(request)
+        return redirect("/")
+    return render(request,  'accounts/change.html', {})
+

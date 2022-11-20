@@ -27,11 +27,14 @@ urlpatterns = [
     path('',  home_view),
     path('desk/',desk_view ),
     path('info/',info_view ),
+    
+
 
 
     path('login/', accounts_views.login_view ),
     path('logout/', accounts_views.logout_view ),
     path('register/', accounts_views.register_view ),
+    path('change/',accounts_views.change_view ),
 
     #path('schedule/create/', schedule_views.schedule_create_view),
     path('schedule/view/', schedule_views.schedule_view_selections),
