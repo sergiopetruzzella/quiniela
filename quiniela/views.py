@@ -47,9 +47,9 @@ def home_view (request):
 def desk_view (request):
     user = request.user 
     user_groups = user.groups.all()
-
+    rsc=  RealScore.objects.count() #RealScoresCount
     users_scores = UserScore.objects.order_by("-points")
-    n_mts = Match.objects.filter(user_id = request.user.id)[:10]
+    n_mts = Match.objects.filter(user_id = request.user.id)[rsc:10+rsc]
     next_matches = []
     for i in n_mts:
         try:
