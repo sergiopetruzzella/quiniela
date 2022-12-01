@@ -256,7 +256,7 @@ def user_puntuation (request,user):
                 {"name":"C", "teams": ["Argentina","Polonia","Arabia Saudita","México"] , "data": [] , "qual": ["Argentina","Polonia"] },
                 {"name":"D", "teams": ["Francia","Dinamarca","Australia","Túnez"] , "data": [] , "qual": ["Francia","Australia"] },
                 {"name":"E", "teams": ["España","Alemania","Costa Rica","Japón"] , "data": [] , "qual": ["",""] },
-                {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["",""] },
+                {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["Marruecos","Croacia"] },
                 {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["",""] },
                 {"name":"H", "teams": ["Portugal","Uruguay","Corea","Ghana"] , "data": [] , "qual": ["",""] },
             ]
