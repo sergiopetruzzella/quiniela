@@ -38,6 +38,7 @@ flags = {
         "Túnez": "\U0001f1f9\U0001f1f3",  
         "USA": "\U0001f1fa\U0001f1f8",
         "Uruguay": "\U0001f1fa\U0001f1fe",
+        "":""
         
 }
 
@@ -213,10 +214,167 @@ def user_puntuation (request,user):
 
                })
 
+            teams_info = []
+            cont = 0
+            for i  in matches:
+                if i.local not in map(lambda x: x["name"] , teams_info ):
+                    cont+=1
+                    teams_info.append({"name":i.local , "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+            
+                if i.visitor not in map(lambda x: x["name"] , teams_info ):
+                    cont+=1
+                    teams_info.append({"name":i.visitor, "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+        
+                local_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.local), None)
+                visitor_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.visitor), None)
+                gd = -i.local_score + i.visitor_score
+                if gd<0 :
+                    teams_info[local_index]["pts"]+=3
+                    teams_info[local_index]["mw"]+=1
+                    teams_info[visitor_index]["ml"]+=1
+                elif gd>0 :
+                    teams_info[visitor_index]["pts"]+=3
+                    teams_info[local_index]["ml"]+=1
+                    teams_info[visitor_index]["mw"]+=1
+                else:
+                    teams_info[visitor_index]["pts"]+=1
+                    teams_info[local_index]["pts"]+=1
+                    teams_info[local_index]["md"]+=1
+                    teams_info[visitor_index]["md"]+=1
+                teams_info[local_index]["gs"]+= i.local_score
+                teams_info[local_index]["gr"]+= i.visitor_score
+                teams_info[visitor_index]["gs"]+= i.visitor_score
+                teams_info[visitor_index]["gr"]+= i.local_score
+                teams_info[local_index]["gd"]-= gd
+                teams_info[visitor_index]["gd"]+= gd
+                        
 
-    context = {"user":username,
-               "data": data
-    
-    }
+        teams_info.sort(key=lambda x: (-x["pts"], -x["gd"], -x["gs"]))
+
+        groups = [ {"name":"A", "teams": ["Catar", "Ecuador" , "Senegal", "Holanda" ] , "data": [] , "qual": ["Holanda", "Senegal"] },
+                {"name":"B", "teams": ["Inglaterra", "USA" , "Gales", "Irán"] , "data": [] , "qual": ["Inglaterra", "USA" ] },
+                {"name":"C", "teams": ["Argentina","Polonia","Arabia Saudita","México"] , "data": [] , "qual": ["Argentina","Polonia"] },
+                {"name":"D", "teams": ["Francia","Dinamarca","Australia","Túnez"] , "data": [] , "qual": ["Francia","Australia"] },
+                {"name":"E", "teams": ["España","Alemania","Costa Rica","Japón"] , "data": [] , "qual": ["",""] },
+                {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["",""] },
+                {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["",""] },
+                {"name":"H", "teams": ["Portugal","Uruguay","Corea","Ghana"] , "data": [] , "qual": ["",""] },
+            ]
+        for team in teams_info:
+            for group in groups: 
+                if team["name"] in group["teams"] and len (group["data"]) < 2 :
+                    pts = 0
+                    team_id =  len (group["data"]) 
+                    if team["name"] == group["qual"][team_id]:
+                        pts += 4
+                    if team["name"] in group["qual"]:
+                        pts += 4                   
+                    
+                    pos = { "pred"  : team["name"],
+                            "pflag" : flags[team["name"]],
+                            "real"  : group["qual"][team_id],
+                            "rflag" : flags[group["qual"][team_id]],
+                            "pts"   : pts 
+                            }
+            
+                    
+                    group["data"].append(pos)
+
+
+        context = {"user":username,
+                "data": data,
+                "groups" :groups , 
+        
+        }
+        
     return render(request,  'accounts/puntuation.html', context)
 
+
+def generate_points_by_groups (request):
+
+    users = User.objects.all() # Cargo los Usuarios
+    for x in users:
+        u_sche = Match.objects.filter(user_id = x.id)
+        if u_sche.count() <48 :
+            continue
+        teams_info = []
+        cont = 0
+        for i  in u_sche:
+            if i.local not in map(lambda x: x["name"] , teams_info ):
+                cont+=1
+                teams_info.append({"name":i.local , "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+        
+            if i.visitor not in map(lambda x: x["name"] , teams_info ):
+                cont+=1
+                teams_info.append({"name":i.visitor, "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+    
+            local_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.local), None)
+            visitor_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.visitor), None)
+            gd = -i.local_score + i.visitor_score
+            if gd<0 :
+                teams_info[local_index]["pts"]+=3
+                teams_info[local_index]["mw"]+=1
+                teams_info[visitor_index]["ml"]+=1
+            elif gd>0 :
+                teams_info[visitor_index]["pts"]+=3
+                teams_info[local_index]["ml"]+=1
+                teams_info[visitor_index]["mw"]+=1
+            else:
+                teams_info[visitor_index]["pts"]+=1
+                teams_info[local_index]["pts"]+=1
+                teams_info[local_index]["md"]+=1
+                teams_info[visitor_index]["md"]+=1
+            teams_info[local_index]["gs"]+= i.local_score
+            teams_info[local_index]["gr"]+= i.visitor_score
+            teams_info[visitor_index]["gs"]+= i.visitor_score
+            teams_info[visitor_index]["gr"]+= i.local_score
+            teams_info[local_index]["gd"]-= gd
+            teams_info[visitor_index]["gd"]+= gd
+                    
+
+        teams_info.sort(key=lambda x: (-x["pts"], -x["gd"], -x["gs"]))
+
+        groups = [ {"name":"A", "teams": ["Catar", "Ecuador" , "Senegal", "Holanda" ] , "data": [] , "qual": ["Holanda", "Senegal"] },
+               {"name":"B", "teams": ["Inglaterra", "USA" , "Gales", "Irán"] , "data": [] , "qual": ["Inglaterra", "USA" ] },
+               {"name":"C", "teams": ["Argentina","Polonia","Arabia Saudita","México"] , "data": [] , "qual": ["Argentina","Polonia"] },
+               {"name":"D", "teams": ["Francia","Dinamarca","Australia","Túnez"] , "data": [] , "qual": ["Francia","Australia"] },
+               {"name":"E", "teams": ["España","Alemania","Costa Rica","Japón"] , "data": [] , "qual": ["",""] },
+               {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["",""] },
+               {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["",""] },
+               {"name":"H", "teams": ["Portugal","Uruguay","Corea","Ghana"] , "data": [] , "qual": ["",""] },
+        ]
+        for team in teams_info:
+            for group in groups:  
+                if team["name"] in group["teams"]:
+                    group["data"].append(team)
+
+        pts = 0 
+        for group in groups:
+            for team_id in range(2):
+                if group["data"][team_id]["name"] == group["qual"][team_id]:
+                    pts += 4
+                if group["data"][team_id]["name"] in group["qual"]:
+                    pts += 4
+
+        try:    
+            score = UserScore.objects.get(user=x)
+            score.points += pts
+            print(score.points)
+            score.save() 
+
+        except: 
+            pass
+
+    x = UserScore.objects.order_by("-points") 
+    data =[]
+    for i in x :
+        user_match_count = Match.objects.filter(user_id= i.user.id).count()
+        data.append({"points": i.points, "user": i.user.username, "count" : user_match_count})
+        
+
+    
+
+    return  render(request, 'admin/ado-table.html', {"list": data} )
+
+    
+    
