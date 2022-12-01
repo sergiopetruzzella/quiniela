@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'quiniela.wsgi.application'
 DATABASES = {
       'default': {
           'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'd9stns0f5t0b2a', 
-          'USER': 'bavpicqqtdscty',
-          'PASSWORD': 'ddcbef4fe0ee251f16c3facf4395009fb630c84c43b77e51b38ccc87a783ccf9',
-          'HOST': 'ec2-52-70-86-157.compute-1.amazonaws.com',
+          'NAME': 'd4snt4235j25o8', 
+          'USER': 'bknunwzhrjhmil',
+          'PASSWORD': 'c311acc3ab92feb6ffd31283e29ff6636f4e466214c9655ce49d9461ba1de418',
+          'HOST': 'ec2-54-159-22-90.compute-1.amazonaws.com',
           'PORT':  '5432', 
                   }
   }
