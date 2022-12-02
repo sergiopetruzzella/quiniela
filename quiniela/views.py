@@ -257,7 +257,7 @@ def user_puntuation (request,user):
                 {"name":"D", "teams": ["Francia","Dinamarca","Australia","Túnez"] , "data": [] , "qual": ["Francia","Australia"] },
                 {"name":"E", "teams": ["España","Alemania","Costa Rica","Japón"] , "data": [] , "qual": ["Japón","España"] },
                 {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["Marruecos","Croacia"] },
-                {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["",""] },
+                {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["Brasil","Suiza"] },
                 {"name":"H", "teams": ["Portugal","Uruguay","Corea","Ghana"] , "data": [] , "qual": ["Portugal","Corea"] },
             ]
         for team in teams_info:
@@ -340,7 +340,7 @@ def generate_points_by_groups (request):
                {"name":"D", "teams": ["Francia","Dinamarca","Australia","Túnez"] , "data": [] , "qual": ["Francia","Australia"] },
                {"name":"E", "teams": ["España","Alemania","Costa Rica","Japón"] , "data": [] , "qual": ["Japón","España"] },
                {"name":"F", "teams": ["Bélgica","Croacia","Canadá","Marruecos"] , "data": [] , "qual": ["Marruecos","Croacia"] },
-               {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["",""] },
+               {"name":"G", "teams": ["Brasil","Serbia","Suiza","Camerún"] , "data": [] , "qual": ["Brasil","Suiza"] },
                {"name":"H", "teams": ["Portugal","Uruguay","Corea","Ghana"] , "data": [] , "qual": ["Portugal","Corea"] },
         ]
         for team in teams_info:
