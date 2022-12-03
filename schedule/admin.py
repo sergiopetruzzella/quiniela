@@ -14,6 +14,6 @@ class RSAdmin (admin.ModelAdmin):
 admin.site.register(RealScore,RSAdmin)
 
 class UserScoreAdmin (admin.ModelAdmin):
-    list_display = ['user', 'points']
+    list_display = ['user', 'points', 'points_fg', 'points_ko']
 
 admin.site.register(UserScore,UserScoreAdmin)

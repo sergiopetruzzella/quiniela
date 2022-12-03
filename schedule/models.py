@@ -23,3 +23,5 @@ class UserScore(models.Model):
         primary_key=True,
     )
     points = models.IntegerField()
+    points_fg = models.IntegerField(default=0)
+    points_ko = models.IntegerField(default=0)

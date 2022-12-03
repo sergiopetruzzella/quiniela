@@ -128,14 +128,18 @@ def generate_points (request):
                     points+= 1 #punto por acertar diferencia de goles
             except:
                 pass
+       
+       
         try:    
-            UserScore.objects.get(user=x).delete()
-        except:
+            score = UserScore.objects.get(user=x)
+            score.points_fg += points
+            score.save() 
+        except: 
             pass
-        UserScore.objects.create(user=x,points=points)
-    x = UserScore.objects.order_by("-points") 
+              
+    score = UserScore.objects.order_by("-points") 
     data =[]
-    for i in x :
+    for i in score :
         user_match_count = Match.objects.filter(user_id= i.user.id).count()
         data.append({"points": i.points, "user": i.user.username, "count" : user_match_count})
        
@@ -358,10 +362,8 @@ def generate_points_by_groups (request):
 
         try:    
             score = UserScore.objects.get(user=x)
-            score.points += pts
-            print(score.points)
+            score.points_fg += pts
             score.save() 
-
         except: 
             pass
 
