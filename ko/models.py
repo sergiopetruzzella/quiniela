@@ -20,3 +20,6 @@ class KORealScore(models.Model):
     local_score = models.IntegerField()
     visitor_score = models.IntegerField()
     visitor = models.TextField()
+    round = models.IntegerField()
+    qualified = models.TextField(default="")
+    looser = models.TextField(default="")

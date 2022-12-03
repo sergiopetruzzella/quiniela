@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 import sys
 from schedule.models import RealScore, Match, UserScore
-from ko.models import KOMatch
+from ko.models import KOMatch, KORealScore
 
 flags = { 
         "Arabia Saudita": "\U0001f1f8\U0001f1e6",
@@ -132,7 +132,7 @@ def generate_points (request):
        
         try:    
             score = UserScore.objects.get(user=x)
-            score.points_fg += points
+            score.points_fg = points
             score.save() 
         except: 
             pass
@@ -373,10 +373,75 @@ def generate_points_by_groups (request):
         user_match_count = Match.objects.filter(user_id= i.user.id).count()
         data.append({"points": i.points, "user": i.user.username, "count" : user_match_count})
         
-
-    
-
     return  render(request, 'admin/ado-table.html', {"list": data} )
+
+
+def generate_ko_points (request):
+    ########################### ACA SE GENERA LA PUNTUACION DE TODOS LOS USUARIOS DE LA PLATAFORMA
+    scores = KORealScore.objects.all() # Resultados Reales
+    users = User.objects.all() # Cargo los Usuarios
+    for x in users:
+        user_matchs = KOMatch.objects.filter(user_id=x.id) #Extraigo las predicciones de un usuario octavos
+        points = 0 
+        for i in scores:  #recorro cada juego 
+            try:
+                us = user_matchs.get(match_number=i.id) #user Score
+                round = i.round 
+                try:
+                    user_result = (-us.local_score + us.visitor_score)/abs(us.local_score - us.visitor_score)
+                except:
+                    user_result = 0
+                try: 
+                    real_result = (-i.local_score + i.visitor_score)/abs(i.local_score - i.visitor_score)
+                except:
+                    real_result = 0 
+                user_goal_diference = -us.local_score + us.visitor_score
+                real_goal_diference = -i.local_score + i.visitor_score
+                goals_diference_error  = abs(user_goal_diference - real_goal_diference)
+                
+                if us.punteable == 1 : 
+                
+                    rounds =[{"res": 4, "loc":1, "vis":1, "dif":1, "qual":3},
+                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":6},
+                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":10},
+                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":16}]
+
+
+
+                    if user_result == real_result : 
+                        points += rounds[round]["res"]
+
+                    if us.local_score == i.local_score and us.local == i.local:
+                        points+= rounds[round]["loc"]    #puntos por acertar goles del local
+
+                    if us.visitor_score == i.visitor_score and us.visitor == i.visitor:
+                        points+= rounds[round]["vis"] #punto por acertar goles del visitante
+
+                    if user_goal_diference == real_goal_diference:
+                        points+= rounds[round]["dif"] #punto por acertar diferencia de goles
+
+                    if us.qualified== i.qualified:
+                        points+= rounds[round]["qual"] #punto por acertar goles del visitante
+            except:
+                pass
+       
+       
+        try:    
+            score = UserScore.objects.get(user=x)
+            score.points_ko = points
+            score.points = score.points_fg+ score.points_ko
+            score.save() 
+        except: 
+            pass
+              
+    scores = UserScore.objects.order_by("-points") 
+    data =[]
+    for i in scores :
+        user_match_count = Match.objects.filter(user_id= i.user.id).count()
+        data.append({"points": i.points, "user": i.user.username, "count" : user_match_count})
+        
+    return  render(request, 'admin/ado-table.html', {"list": data} )
+       
 
     
     
