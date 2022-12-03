@@ -34,10 +34,12 @@ def ko_create_view(request):
                         {"id":"16",  "local" : "13"    , "visitor" : "14"},
     ] 
 
-
     if request.method == "POST":
         KOMatch.objects.filter(user_id=request.user.id).delete()
         for x in octavos:
+            punt = 1
+            if x["id"] <=  1:
+                punt = 0 
             local_score=request.POST.get("local"+x["id"])
             visitor_score=request.POST.get("visitor"+x["id"])
             local=x["local"] 
@@ -57,7 +59,8 @@ def ko_create_view(request):
                 user_id = request.user.id   , 
                 match_number = x["id"],
                 round = 1, 
-                qualified = qual 
+                qualified = qual ,
+                punteable = punt 
                 )
         oct =   KOMatch.objects.filter(user_id=request.user.id, round =1 )
         for x in cuartos:

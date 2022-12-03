@@ -12,3 +12,11 @@ class KOMatch (models.Model):
     round = models.IntegerField()
     qualified = models.TextField(default="")
     looser = models.TextField(default="")
+    punteable = models.IntegerField(default=1)
+
+
+class KORealScore(models.Model):
+    local = models.TextField()
+    local_score = models.IntegerField()
+    visitor_score = models.IntegerField()
+    visitor = models.TextField()
