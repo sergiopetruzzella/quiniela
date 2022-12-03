@@ -3,6 +3,12 @@
 {% if request.user.is_authenticated %}
 <H1>Hola {{request.user}}</H1>
 
+
+{% if matches %}
+<p style="color: green ;">Fase final llenada correctamente</p>
+{% else %}
+
+
 <div class="container-flex mb-5">
 <a href="/ko/create" class="btn text-gold bg-red btn-lg mx-4 my-1">Crear Fase Final</a>
 {% if matches %}
@@ -16,7 +22,6 @@
 <p>Si editas tus seleccines de fase final depsues de una partido perderas la oportunidad de obtener puntos en ese partido y en los anteriores</p>
 
 {% if matches %}
-<p> Fase final llenada correctamente</p>
 <div class="p-3 mt-3">
 <h2>Mis Selecciones en fase final</h2>
 <hr class="mb-5">
