@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from accounts import views as accounts_views
 from schedule import views as schedule_views
+from ko import views as ko_views
 from group import views as group_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -40,6 +41,10 @@ urlpatterns = [
     path('schedule/view/', schedule_views.schedule_view_selections),
     #path('schedule/edit/', schedule_views.schedule_edit_selections),
     path('schedule/group-board/', schedule_views.schedule_group_board_selections),
+
+
+    path('ko/create/', ko_views.ko_create_view),
+
 
 
     path('group/create/', group_views.group_create_view),

@@ -1,0 +1,397 @@
+{% extends "base.html" %}
+
+
+{% block content%}
+
+
+<a href="/desk" class="btn btn-lg bg-red text-gold m-3"><i class="fa fa-arrow-left"></i> Regresar al Escritorio</a>
+
+<div class="container text-center p-3">
+<h1 class="text-center"> Crear Quiniela</h1>
+</div>
+<form action="/ko/create/" class="align-items-center" method="POST">
+  {% csrf_token %} 
+
+
+
+  <div class="container text-center h5"><p>Octavos de final</p></div>
+{% for x in octavos %}
+<div class="form-group row" >
+   <label for="" class="col-4 col-form-label text-end"><span id="label_local_{{x.id}}">{{x.local}} </span><span id="local_flag_{{x.id}}">{{x.lf}}</span></label> 
+   <div class="col-2">
+    <input onchange="myFunction2({{x.id}})" class="col-2 form-control border-red" type="number" required max="9" min="0" name="local{{x.id}}"  id="local{{x.id}}"  style="height: 2em">
+    </div>
+    <div class="col-2">
+   <input onchange="myFunction2({{x.id}})" class="form-control border-red" type="number" required max="9" min="0" name="visitor{{x.id}}" id="visitor{{x.id}}" style="height: 2em">
+    </div>
+   
+   <label class="col-4 col-form-label text-start"><span  id="visitor_flag_{{x.id}}" class="me-1">{{x.vf}}</span><span  id="label_visitor_{{x.id}}">{{x.visitor}}</span></label>
+</div>
+<div style="display: none" id="radio{{x.id}}">
+<div class="d-flex  justify-content-center" >
+           <p class="me-2">Quien pasara en penaltis:  </p>
+           <div class="form-check form-check-inline me-4">
+            <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_1" value="1">
+            <label class="form-check-label" id="radio_label_local_{{x.id}}" >{{x.local}} {{x.lf}}</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <label class="form-check-label" id="radio_label_visitor_{{x.id}}" >{{x.visitor}} {{x.vf}}</label>
+            <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_2" value="2">
+          </div>
+ </div>
+</div>
+{% endfor %}
+<div class="form-group row pt-3" >
+<div class="col-4" ></div>
+<div onclick="calcularCuartos()" class="btn bg-red text-gold col-4 ">Calcular Cuartos de Final</div>
+<div class="col-4" ></div>
+</div>
+
+
+
+
+<div id="cuartos-block" class="mt-3" style="display: none ;">
+<div class="container text-center h5"><p>Cuartos de final</p></div>
+{% for x in cuartos %}
+<div class="form-group row" >
+   <label for="" class="col-4 col-form-label text-end"><span id="label_local_{{x.id}}"></span><span id="local_flag_{{x.id}}"></span></label> 
+   <div class="col-2">
+        <input onchange="myFunction2({{x.id}})" class="col-2 form-control border-red" type="number" required max="9" min="0" name="local{{x.id}}"  id="local{{x.id}}"  style="height: 2em">
+    </div>
+    <div class="col-2">
+   <input onchange="myFunction2({{x.id}})" class="form-control border-red" type="number" required max="9" min="0" name="visitor{{x.id}}" id="visitor{{x.id}}" style="height: 2em">
+    </div>
+   
+   <label class="col-4 col-form-label text-start"><span id="visitor_flag_{{x.id}}"></span><span class="me-2" id="label_visitor_{{x.id}}"></span></label>
+</div>
+<div style="display: none" id="radio{{x.id}}">
+  <div class="d-flex  justify-content-center" >
+             <p class="me-2">Quien pasara en penaltis:  </p>
+             <div class="form-check form-check-inline me-4">
+              <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_1" value="1">
+              <label class="form-check-label" id="radio_label_local_{{x.id}}" >{{x.local}} {{x.lf}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label" id="radio_label_visitor_{{x.id}}" >{{x.visitor}} {{x.vf}}</label>
+              <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_2" value="2">
+            </div>
+   </div>
+  </div>
+{% endfor %}
+<div class="form-group row pt-3" >
+  <div class="col-4" ></div>
+  <div onclick="calcularSemis()" class="btn bg-red text-gold col-4 ">Calcular Semifinales</div>
+  <div class="col-4" ></div>
+  </div>
+</div>
+
+
+
+
+<div id="semis-block" class="mt-3" style="display: none ;">
+<div class="container text-center h5"><p>Semifinales</p></div>
+  {% for x in semis %}
+  <div class="form-group row" >
+     <label for="" class="col-4 col-form-label text-end"><span id="label_local_{{x.id}}"></span><span id="local_flag_{{x.id}}"></span></label> 
+     <div class="col-2">
+          <input onchange="myFunction2({{x.id}})" class="col-2 form-control border-red" type="number" required max="9" min="0" name="local{{x.id}}"  id="local{{x.id}}"  style="height: 2em">
+      </div>
+      <div class="col-2">
+     <input onchange="myFunction2({{x.id}})" class="form-control border-red" type="number" required max="9" min="0" name="visitor{{x.id}}" id="visitor{{x.id}}" style="height: 2em">
+      </div>
+     
+     <label class="col-4 col-form-label text-start"><span id="visitor_flag_{{x.id}}"></span><span class="me-2" id="label_visitor_{{x.id}}"></span></label>
+  </div>
+  <div style="display: none" id="radio{{x.id}}">
+    <div class="d-flex  justify-content-center" >
+               <p class="me-2">Quien pasara en penaltis:  </p>
+               <div class="form-check form-check-inline me-4">
+                <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_1" value="1">
+                <label class="form-check-label" id="radio_label_local_{{x.id}}" >{{x.local}} {{x.lf}}</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <label class="form-check-label" id="radio_label_visitor_{{x.id}}" >{{x.visitor}} {{x.vf}}</label>
+                <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_2" value="2">
+              </div>
+     </div>
+    </div>
+  {% endfor %}
+  <div class="form-group row pt-3" >
+    <div class="col-4" ></div>
+    <div onclick="calcularFinal()" class="btn bg-red text-gold col-4 ">Calcular Final y 3er puesto</div>
+    <div class="col-4" ></div>
+    </div>
+  </div>
+
+
+
+
+
+  <div id="final-block" class="mt-3" style="display: none ;">
+    <div class="container text-center h5"><p>Tercer puesto y Final</p></div>
+    {% for x in final %}
+    <div class="form-group row" >
+       <label for="" class="col-4 col-form-label text-end"><span id="label_local_{{x.id}}"></span><span id="local_flag_{{x.id}}"></span></label> 
+       <div class="col-2">
+            <input onchange="myFunction2({{x.id}})" class="col-2 form-control border-red" type="number" required max="9" min="0" name="local{{x.id}}"  id="local{{x.id}}"  style="height: 2em">
+        </div>
+        <div class="col-2">
+       <input onchange="myFunction2({{x.id}})" class="form-control border-red" type="number" required max="9" min="0" name="visitor{{x.id}}" id="visitor{{x.id}}" style="height: 2em">
+        </div>
+       
+       <label class="col-4 col-form-label text-start"><span id="visitor_flag_{{x.id}}"></span><span class="me-2" id="label_visitor_{{x.id}}"></span></label>
+    </div>
+    <div style="display: none" id="radio{{x.id}}">
+      <div class="d-flex  justify-content-center" >
+                 <p class="me-2">Quien ganara en penaltis:  </p>
+                 <div class="form-check form-check-inline me-4">
+                  <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_1" value="1">
+                  <label class="form-check-label" id="radio_label_local_{{x.id}}" >{{x.local}} {{x.lf}}</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label" id="radio_label_visitor_{{x.id}}" >{{x.visitor}} {{x.vf}}</label>
+                  <input class="form-check-input" type="radio" name="radio{{x.id}}" id="radio{{x.id}}_2" value="2">
+                </div>
+       </div>
+      </div>
+    {% endfor %}
+    <div class="form-group row pt-3" >
+      <div class="col-4" ></div>
+      <button type="submit" class="btn bg-red text-gold btn-lg col-4 ">Enviar Quiniela</button>
+      <div class="col-4" ></div>
+      </div>
+    </div>
+
+
+
+</form>
+
+
+ <script>
+
+function myFunction2(num) {
+local_id = "local"+num
+visitor_id = "visitor"+ num
+local = document.getElementById(local_id).value;
+visitor = document.getElementById(visitor_id).value;
+radio_id = "radio" + num 
+radio = document.getElementById(radio_id)
+
+
+
+
+if (local == visitor) {   
+radio.style.display = "block";
+radio_label_local =   "radio_label_local_"+num
+radio_label_visitor = "radio_label_visitor_"+num
+label_local_id = "label_local_"+num
+label_visitor_id = "label_visitor_"+num
+document.getElementById(radio_label_local).innerHTML = document.getElementById(label_local_id).innerHTML
+document.getElementById(radio_label_visitor).innerHTML = document.getElementById(label_visitor_id).innerHTML
+}
+
+if (local != visitor && radio.style.display == "block" )  {   
+radio.style.display = "none";
+}} 
+
+function calcularCuartos(params) {
+
+document.getElementById("cuartos-block").style.display = "block"
+
+for (let index = 9; index < 13; index++) 
+{ 
+let label_local_id = "label_local_"+index
+let label_visitor_id = "label_visitor_"+index 
+let local_flag_id = "local_flag_"+index
+let visitor_flag_id = "visitor_flag_"+index
+const prev1 = (index - 8)*2 -1
+const prev2 = (index - 8)*2 
+let local_1_id = "local"+prev1
+let visit_1_id = "visitor"+prev1
+let local_2_id = "local"+prev2
+let visit_2_id = "visitor"+prev2
+let local_1_goals = parseInt(document.getElementById(local_1_id).value)
+let visit_1_goals = parseInt(document.getElementById(visit_1_id).value)
+let local_2_goals = parseInt(document.getElementById(local_2_id).value)
+let visit_2_goals = parseInt(document.getElementById(visit_2_id).value)
+pen = 0
+if (local_1_goals==visit_1_goals){
+  let querycode = 'input[name="radio'+prev1+ '"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+if (local_1_goals>visit_1_goals || pen == 1) { 
+let label_winner_1 = "label_local_"+ prev1
+let flag_winner_1 = "local_flag_" + prev1
+document.getElementById(label_local_id).innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById(local_flag_id).innerHTML = document.getElementById(flag_winner_1).innerHTML
+} else if (local_1_goals<visit_1_goals || pen == 2 ){
+var label_winner_1 = "label_visitor_"+ prev1
+let flag_winner_1 = "visitor_flag_" + prev1
+document.getElementById(label_local_id).innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById(local_flag_id).innerHTML = document.getElementById(flag_winner_1).innerHTML
+}
+pen = 0
+if (local_2_goals==visit_2_goals){
+  let querycode = 'input[name="radio'+prev2+ '"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+
+if (local_2_goals>visit_2_goals || pen == 1) { 
+var label_winner_2 = "label_local_"+ prev2
+let flag_winner_2 = "local_flag_" + prev2
+document.getElementById(label_visitor_id).innerHTML = document.getElementById(label_winner_2).innerHTML   
+document.getElementById(visitor_flag_id).innerHTML = document.getElementById(flag_winner_2).innerHTML   
+} else if (local_2_goals<visit_2_goals || pen == 2){
+var label_winner_2 = "label_visitor_"+ prev2
+let flag_winner_2 = "visitor_flag_" + prev2
+document.getElementById(label_visitor_id).innerHTML = document.getElementById(label_winner_2).innerHTML   
+document.getElementById(visitor_flag_id).innerHTML = document.getElementById(flag_winner_2).innerHTML   
+} 
+}
+}
+
+
+function calcularSemis(params) {
+
+document.getElementById("semis-block").style.display = "block"
+for (let index = 13; index < 15; index++) 
+{ 
+let label_local_id = "label_local_"+index
+let label_visitor_id = "label_visitor_"+index 
+let local_flag_id = "local_flag_"+index
+let visitor_flag_id = "visitor_flag_"+index
+const prev1 = (index - 4)
+const prev2 = (index - 2)
+let local_1_id = "local"+prev1
+let visit_1_id = "visitor"+prev1
+let local_2_id = "local"+prev2
+let visit_2_id = "visitor"+prev2
+let local_1_goals = parseInt(document.getElementById(local_1_id).value)
+let visit_1_goals = parseInt(document.getElementById(visit_1_id).value)
+let local_2_goals = parseInt(document.getElementById(local_2_id).value)
+let visit_2_goals = parseInt(document.getElementById(visit_2_id).value)
+pen = 0
+if (local_1_goals==visit_1_goals){
+  let querycode = 'input[name="radio'+prev1+ '"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+if (local_1_goals>visit_1_goals || pen == 1) { 
+let label_winner_1 = "label_local_"+ prev1
+let flag_winner_1 = "local_flag_" + prev1
+document.getElementById(label_local_id).innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById(local_flag_id).innerHTML = document.getElementById(flag_winner_1).innerHTML
+} else if (local_1_goals<visit_1_goals || pen == 2 ){
+var label_winner_1 = "label_visitor_"+ prev1
+let flag_winner_1 = "visitor_flag_" + prev1
+document.getElementById(label_local_id).innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById(local_flag_id).innerHTML = document.getElementById(flag_winner_1).innerHTML
+}
+pen = 0
+if (local_2_goals==visit_2_goals){
+  let querycode = 'input[name="radio'+prev2+ '"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+
+if (local_2_goals>visit_2_goals || pen == 1) { 
+var label_winner_2 = "label_local_"+ prev2
+let flag_winner_2 = "local_flag_" + prev2
+document.getElementById(label_visitor_id).innerHTML = document.getElementById(label_winner_2).innerHTML   
+document.getElementById(visitor_flag_id).innerHTML = document.getElementById(flag_winner_2).innerHTML   
+} else if (local_2_goals<visit_2_goals || pen == 2){
+var label_winner_2 = "label_visitor_"+ prev2
+let flag_winner_2 = "visitor_flag_" + prev2
+document.getElementById(label_visitor_id).innerHTML = document.getElementById(label_winner_2).innerHTML   
+document.getElementById(visitor_flag_id).innerHTML = document.getElementById(flag_winner_2).innerHTML   
+} 
+}
+}
+
+function calcularFinal(params) {
+document.getElementById("final-block").style.display = "block"
+
+let local_1_goals = parseInt(document.getElementById("local13").value)
+let visit_1_goals = parseInt(document.getElementById("visitor13").value)
+let local_2_goals = parseInt(document.getElementById("local14").value)
+let visit_2_goals = parseInt(document.getElementById("visitor14").value)
+
+pen = 0
+if (local_1_goals==visit_1_goals){
+  let querycode = 'input[name="radio13"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+if (local_1_goals>visit_1_goals || pen == 1) { 
+let label_winner_1 = "label_local_13"
+let flag_winner_1 = "local_flag_13" 
+let label_looser_1 = "label_visitor_13"
+let flag_looser_1 = "visitor_flag_13"
+document.getElementById("label_local_16").innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById("local_flag_16").innerHTML = document.getElementById(flag_winner_1).innerHTML
+document.getElementById("label_local_15").innerHTML = document.getElementById(label_looser_1).innerHTML
+document.getElementById("local_flag_15").innerHTML = document.getElementById(flag_looser_1).innerHTML
+} else if (local_1_goals<visit_1_goals || pen == 2){
+let label_winner_1 = "label_visitor_13"
+let flag_winner_1 = "visitor_flag_13" 
+let label_looser_1 = "label_local_13"
+let flag_looser_1 = "local_flag_13"
+document.getElementById("label_local_16").innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById("local_flag_16").innerHTML = document.getElementById(flag_winner_1).innerHTML
+document.getElementById("label_local_15").innerHTML = document.getElementById(label_looser_1).innerHTML
+document.getElementById("local_flag_15").innerHTML = document.getElementById(flag_looser_1).innerHTML
+}
+
+pen = 0
+if (local_2_goals==visit_2_goals){
+  let querycode = 'input[name="radio14"]:checked'
+  pen = document.querySelector(querycode).value
+}
+
+if (local_2_goals>visit_2_goals || pen == 1) { 
+let label_winner_1 = "label_local_14"
+let flag_winner_1 = "local_flag_14" 
+let label_looser_1 = "label_visitor_14"
+let flag_looser_1 = "visitor_flag_14"
+document.getElementById("label_visitor_16").innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById("visitor_flag_16").innerHTML = document.getElementById(flag_winner_1).innerHTML
+document.getElementById("label_visitor_15").innerHTML = document.getElementById(label_looser_1).innerHTML
+document.getElementById("visitor_flag_15").innerHTML = document.getElementById(flag_looser_1).innerHTML
+} else if (local_1_goals<visit_1_goals || pen == 2){
+let label_winner_1 = "label_visitor_14"
+let flag_winner_1 = "visitor_flag_14" 
+let label_looser_1 = "label_local_14"
+let flag_looser_1 = "local_flag_14"
+document.getElementById("label_visitor_16").innerHTML = document.getElementById(label_winner_1).innerHTML
+document.getElementById("visitor_flag_16").innerHTML = document.getElementById(flag_winner_1).innerHTML
+document.getElementById("label_visitor_15").innerHTML = document.getElementById(label_looser_1).innerHTML
+document.getElementById("visitor_flag_15").innerHTML = document.getElementById(flag_looser_1).innerHTML
+}
+
+}
+
+
+ </script>
+
+<style> 
+    @media (max-width: 600px) {
+        .col-form-label, .form-control {
+          font-size: 0.9rem;
+        }}
+    
+        @media (max-width: 600px) {
+        .col-2, .col-form-label {
+          padding: 2px 4px;}
+        }
+    
+    
+    
+        @media (max-width: 450px) {
+        .col-form-label, .form-control {
+          font-size: 0.9rem;
+        }
+      } </style>
+
+{% endblock%}

@@ -9,9 +9,9 @@
 
 <div class="container-flex mb-5">
 {% if matches %}
+<a href="/ko/create" class="btn text-gold bg-red btn-lg mx-4 my-1">Crear Fase Final</a>
 <a href="/schedule/group-board" class="btn text-gold bg-red btn-lg mx-4 my-1">Mi pizarra de grupos</a>
 <a href="/user/{{request.user.username}}" class="btn text-gold bg-red btn-lg mx-4 my-1">Mi puntuación detallada</a>
-<a href="/schedule/view" class="btn text-gold bg-red btn-lg mx-4 my-1">Ver mi Quiniela</a>
 {% else %}
 <h3>Expiró el plazo para crear tu quiniela para la fase de grupos</h3>
 {% endif %}
