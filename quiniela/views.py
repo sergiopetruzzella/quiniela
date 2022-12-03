@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 import sys
 from schedule.models import RealScore, Match, UserScore
+from ko.models import KOMatch
 
 flags = { 
         "Arabia Saudita": "\U0001f1f8\U0001f1e6",
@@ -48,9 +49,8 @@ def home_view (request):
 def desk_view (request):
     user = request.user 
     user_groups = user.groups.all()
-    rsc=  RealScore.objects.count() #RealScoresCount
     users_scores = UserScore.objects.order_by("-points")
-    n_mts = Match.objects.filter(user_id = request.user.id)
+    n_mts = KOMatch.objects.filter(user_id = request.user.id)
     next_matches = []
     for i in n_mts:
         try:
