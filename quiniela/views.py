@@ -409,19 +409,19 @@ def generate_ko_points (request):
 
 
                     if user_result == real_result : 
-                        points += rounds[round]["res"]
+                        points += rounds[round-1]["res"]
 
                     if us.local_score == i.local_score and us.local == i.local:
-                        points+= rounds[round]["loc"]    #puntos por acertar goles del local
+                        points+= rounds[round-1]["loc"]    #puntos por acertar goles del local
 
                     if us.visitor_score == i.visitor_score and us.visitor == i.visitor:
-                        points+= rounds[round]["vis"] #punto por acertar goles del visitante
+                        points+= rounds[round-1]["vis"] #punto por acertar goles del visitante
 
                     if user_goal_diference == real_goal_diference:
-                        points+= rounds[round]["dif"] #punto por acertar diferencia de goles
+                        points+= rounds[round-1]["dif"] #punto por acertar diferencia de goles
 
                     if us.qualified== i.qualified:
-                        points+= rounds[round]["qual"] #punto por acertar goles del visitante
+                        points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
             except:
                 pass
        
