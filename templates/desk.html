@@ -47,6 +47,22 @@
   {% for x in user_groups %}     
   <div class="p-1">
     <h4>Tabla del grupo {{x}}</h4>
+
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active text-red" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Total</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link text-red" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Fase Final</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link text-red" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Grupos</button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
     <table class="table table-sm table-striped table-bordered">
       <thead>
           <tr>
@@ -65,6 +81,53 @@
     {%endfor%}
         </tbody>
   </table>
+
+</div>
+<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+  <table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Puntaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for y in x.user_set.all|dictsortreversed:"userscore.points_ko" %}
+<tr>
+    <th scope="row">{{forloop.counter}}</th>
+    <td><a href="/user/{{y}}" style="color: #1744ad">{{y}}</a></td>
+    <td>{{y.userscore.points_ko}}</td>
+  </tr>
+  {%endfor%}
+      </tbody>
+</table>
+</div>
+<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+  <table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Puntaje</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for y in x.user_set.all|dictsortreversed:"userscore.points_fg" %}
+<tr>
+    <th scope="row">{{forloop.counter}}</th>
+    <td><a href="/user/{{y}}" style="color: #1744ad">{{y}}</a></td>
+    <td>{{y.userscore.points_fg}}</td>
+  </tr>
+  {%endfor%}
+      </tbody>
+</table>
+
+</div>
+
+
   </div>
   {%endfor%}
 </div>
