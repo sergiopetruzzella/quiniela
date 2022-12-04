@@ -38,7 +38,7 @@ def ko_create_view(request):
         KOMatch.objects.filter(user_id=request.user.id).delete()
         for x in octavos:
             punt = 1
-            if int(x["id"]) <=  2:
+            if int(x["id"]) <=  3:
                 punt = 0 
             local_score=request.POST.get("local"+x["id"])
             visitor_score=request.POST.get("visitor"+x["id"])
