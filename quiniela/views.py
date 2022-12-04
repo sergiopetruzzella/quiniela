@@ -443,5 +443,19 @@ def generate_ko_points (request):
     return  render(request, 'admin/ado-table.html', {"list": data} )
        
 
+
+
+def admin_table_view (request):      
+                
+    scores = UserScore.objects.order_by("-points") 
+    data =[]
+    for i in scores :
+        user_match_count = Match.objects.filter(user_id= i.user.id).count()
+        data.append({"points": i.points, "user": i.user.username, "count" : user_match_count, "user_id": i.user.id })
+        
+    return  render(request, 'admin/ado-table.html', {"list": data} )
+       
+
+    
     
     

@@ -22,7 +22,7 @@ from group import views as group_views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from .views import home_view, desk_view, admin_manage_view, generate_points, generate_ko_points, info_view, user_puntuation, generate_points_by_groups
+from .views import home_view, desk_view, admin_manage_view, generate_points, generate_ko_points, info_view, user_puntuation, generate_points_by_groups, admin_table_view
 
 urlpatterns = [
     path('',  home_view),
@@ -62,6 +62,8 @@ urlpatterns = [
 
     
     path('manage/', admin_manage_view),
+    path('manage/table', admin_table_view),
+
     path('manage/generate-points/', generate_points),
     path('manage/generate-points-by-groups/', generate_points_by_groups),
     path('manage/generate-ko-points/', generate_ko_points),

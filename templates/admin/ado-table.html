@@ -4,6 +4,7 @@
     <thead>
         <tr>
           <th scope="col">#</th>
+          <th scope="col">id</th>
           <th scope="col">Nombre</th>
           <th scope="col">Puntaje</th>
           <th scope="col">cuenta</th>
@@ -14,10 +15,10 @@
 
 <tr>
     <th scope="row">{{forloop.counter}}</th>
+    <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.user_id}}</a></td>
     <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.user}}</a></td>
     <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.points}}</a></td>
     <td><a href="/user/{{x.user}}" style="color: #1744ad">{{x.count}}</a></td>
-    <td>{{x.points}}</td>
    
   </tr>
 {% endfor %}
