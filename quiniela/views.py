@@ -180,7 +180,6 @@ def user_puntuation (request,user):
                real_goal_diference = -r_s.local_score + r_s.visitor_score
                goals_diference_error  = abs(user_goal_diference - real_goal_diference)
                points  = 0 
-               print(points)
                if user_result == real_result : 
                    points += 4 # 4 puntos por acertar vencedor
                elif goals_diference_error == 1:
@@ -203,7 +202,7 @@ def user_puntuation (request,user):
                    "visitor_flag": flags[i.visitor],
                    "real_local_score"  : r_s.local_score,
                    "real_visitor_score": r_s.visitor_score, 
-                   "points": points
+                   "points": points, 
 
                })
             except: 
@@ -218,40 +217,123 @@ def user_puntuation (request,user):
 
                })
 
-            teams_info = []
-            cont = 0
-            for i  in matches:
-                if i.local not in map(lambda x: x["name"] , teams_info ):
-                    cont+=1
-                    teams_info.append({"name":i.local , "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
-            
-                if i.visitor not in map(lambda x: x["name"] , teams_info ):
-                    cont+=1
-                    teams_info.append({"name":i.visitor, "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+
+###############################################################################################################
+####################################### GENERATE KO DATA ###################################################### 
+        ko_matches =False
+        try: 
+            ko_matches  = KOMatch.objects.filter(user_id = username.id)  
+            ko_real_scores      = KORealScore.objects.all()
+        except:
+            pass
+
+        ko_data = []
+        if ko_matches:
+            for ko_match in ko_matches:
+                number = ko_match.match_number##### REAL KO SSCORES  
+                  
+                try: rks = ko_real_scores.get(id=number) 
+                except: rks = False 
+                if rks:
+                    round = ko_match.round 
+                    if ko_match.punteable =="0" : points = "NP"
+                    if ko_match.punteable == "1" :  
+                        try:
+                            user_result = (-ko_match.local_score + ko_match.visitor_score)/abs(ko_match.local_score - ko_match.visitor_score)
+                        except:
+                            user_result = 0
+                        try: 
+                            real_result = (-rks.local_score + rks.visitor_score)/abs(rks.local_score - rks.visitor_score)
+                        except:
+                            real_result = 0 
+                        user_goal_diference = -ko_match.local_score + ko_match.visitor_score
+                        real_goal_diference = -rks.local_score + rks.visitor_score
+                        goals_diference_error  = abs(user_goal_diference - real_goal_diference)
+                    
+                        points=0
+                        rounds =[{"res": 4, "loc":1, "vis":1, "dif":1, "qual":3},
+                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":6},
+                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":10},
+                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":16}]
+                        if user_result == real_result : 
+                            points += rounds[round-1]["res"]
+                        if ko_match.local_score == rks.local_score and ko_match.local == rks.local:
+                            points+= rounds[round-1]["loc"]    #puntos por acertar goles del loca
+                        if ko_match.visitor_score == rks.visitor_score and ko_match.visitor == rks.visitor:
+                            points+= rounds[round-1]["vis"] #punto por acertar goles del visitant
+                        if user_goal_diference == real_goal_diference:
+                            points+= rounds[round-1]["dif"] #punto por acertar diferencia de gole
+                        if ko_match.qualified== rks.qualified:
+                            points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
+                    
+                    ko_data.append({
+                        "local" : ko_match.local ,
+                        "local_flag": flags[ko_match.local],
+                        "local_score": ko_match.local_score,
+                        "visitor": ko_match.visitor,
+                        "visitor_score": ko_match.visitor_score,
+                        "visitor_flag": flags[ko_match.visitor],
+                        "real_local_score"  : rks.local_score,
+                        "real_local"  : rks.local,
+                        "real_visitor": rks.visitor, 
+                        "real_visitor_score": rks.visitor_score, 
+                        "points": points,
+                        "round": round, 
+
+                            })   
+
+                else:  
+                    ko_data.append({
+                        "local" : ko_match.local ,
+                        "local_flag": flags[ko_match.local],
+                        "local_score": ko_match.local_score,
+                        "visitor": ko_match.visitor,
+                        "visitor_score": ko_match.visitor_score,
+                        "visitor_flag": flags[ko_match.visitor],
+                        "round": round, 
+
+                            })     
+
+                    
+                
+
+    
+    
+
+        teams_info = []
+        cont = 0
+        for i  in matches:
+            if i.local not in map(lambda x: x["name"] , teams_info ):
+                cont+=1
+                teams_info.append({"name":i.local , "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
         
-                local_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.local), None)
-                visitor_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.visitor), None)
-                gd = -i.local_score + i.visitor_score
-                if gd<0 :
-                    teams_info[local_index]["pts"]+=3
-                    teams_info[local_index]["mw"]+=1
-                    teams_info[visitor_index]["ml"]+=1
-                elif gd>0 :
-                    teams_info[visitor_index]["pts"]+=3
-                    teams_info[local_index]["ml"]+=1
-                    teams_info[visitor_index]["mw"]+=1
-                else:
-                    teams_info[visitor_index]["pts"]+=1
-                    teams_info[local_index]["pts"]+=1
-                    teams_info[local_index]["md"]+=1
-                    teams_info[visitor_index]["md"]+=1
-                teams_info[local_index]["gs"]+= i.local_score
-                teams_info[local_index]["gr"]+= i.visitor_score
-                teams_info[visitor_index]["gs"]+= i.visitor_score
-                teams_info[visitor_index]["gr"]+= i.local_score
-                teams_info[local_index]["gd"]-= gd
-                teams_info[visitor_index]["gd"]+= gd
-                        
+            if i.visitor not in map(lambda x: x["name"] , teams_info ):
+                cont+=1
+                teams_info.append({"name":i.visitor, "pts": 0 , "mw": 0, "md": 0, "ml": 0,  "gs": 0, "gr": 0, "gd": 0})
+  
+            local_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.local), None)
+            visitor_index = next((index for (index, d) in enumerate(teams_info) if d["name"] == i.visitor), None)
+            gd = -i.local_score + i.visitor_score
+            if gd<0 :
+                teams_info[local_index]["pts"]+=3
+                teams_info[local_index]["mw"]+=1
+                teams_info[visitor_index]["ml"]+=1
+            elif gd>0 :
+                teams_info[visitor_index]["pts"]+=3
+                teams_info[local_index]["ml"]+=1
+                teams_info[visitor_index]["mw"]+=1
+            else:
+                teams_info[visitor_index]["pts"]+=1
+                teams_info[local_index]["pts"]+=1
+                teams_info[local_index]["md"]+=1
+                teams_info[visitor_index]["md"]+=1
+            teams_info[local_index]["gs"]+= i.local_score
+            teams_info[local_index]["gr"]+= i.visitor_score
+            teams_info[visitor_index]["gs"]+= i.visitor_score
+            teams_info[visitor_index]["gr"]+= i.local_score
+            teams_info[local_index]["gd"]-= gd
+            teams_info[visitor_index]["gd"]+= gd
+                    
 
         teams_info.sort(key=lambda x: (-x["pts"], -x["gd"], -x["gs"]))
 
@@ -285,9 +367,10 @@ def user_puntuation (request,user):
                     group["data"].append(pos)
 
 
-        context = {"user":username,
+    context = {"user":username,
                 "data": data,
                 "groups" :groups , 
+                "ko_data": ko_data
         
         }
         
