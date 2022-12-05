@@ -236,8 +236,8 @@ def user_puntuation (request,user):
                 except: rks = False 
                 if rks:
                     round = ko_match.round 
-                    if ko_match.punteable =="0" : points = "NP"
-                    if ko_match.punteable == "1" :  
+                    if ko_match.punteable ==0: points = "NP"
+                    if ko_match.punteable == 1 :  
                         try:
                             user_result = (-ko_match.local_score + ko_match.visitor_score)/abs(ko_match.local_score - ko_match.visitor_score)
                         except:
