@@ -231,11 +231,11 @@ def user_puntuation (request,user):
         if ko_matches:
             for ko_match in ko_matches:
                 number = ko_match.match_number##### REAL KO SSCORES  
-                  
+                round = ko_match.round
                 try: rks = ko_real_scores.get(id=number) 
                 except: rks = False 
                 if rks:
-                    round = ko_match.round 
+                    
                     if ko_match.punteable ==0: points = "NP"
                     if ko_match.punteable == 1 :  
                         try:
@@ -265,7 +265,6 @@ def user_puntuation (request,user):
                             points+= rounds[round-1]["dif"] #punto por acertar diferencia de gole
                         if ko_match.qualified== rks.qualified:
                             points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
-                    
                     ko_data.append({
                         "local" : ko_match.local ,
                         "local_flag": flags[ko_match.local],
