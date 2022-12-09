@@ -251,19 +251,28 @@ def user_puntuation (request,user):
                         goals_diference_error  = abs(user_goal_diference - real_goal_diference)
                     
                         points=0
-                        rounds =[{"res": 4, "loc":1, "vis":1, "dif":1, "qual":3},
-                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":6},
-                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":10},
-                                 {"res": 1, "loc":2, "vis":2, "dif":1, "qual":16}]
+                        rounds =[{"res": 1, "loc":1, "vis":1, "dif":1, "qual":3},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":10},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":16}]
+
+                        teams_count= 0 
+                        if ko_match.local == rks.local: teams_count+=1 
+                        if ko_match.visitor == rks.visitor: teams_count+=1
+      
+                        mult = [0,1,2,4]    
+                        mult2 = [0,1,1]
+      
+
                         if user_result == real_result : 
-                            points += rounds[round-1]["res"]
+                            points += rounds[round-1]["res"] * mult[teams_count+1]
                         if ko_match.local_score == rks.local_score and ko_match.local == rks.local:
                             points+= rounds[round-1]["loc"]    #puntos por acertar goles del loca
                         if ko_match.visitor_score == rks.visitor_score and ko_match.visitor == rks.visitor:
                             points+= rounds[round-1]["vis"] #punto por acertar goles del visitant
-                        if user_goal_diference == real_goal_diference:
+                        if user_goal_diference == real_goal_diference * mult2[teams_count+1]:
                             points+= rounds[round-1]["dif"] #punto por acertar diferencia de gole
-                        if ko_match.qualified== rks.qualified:
+                        if ko_match.qualified== rks.qualified :
                             points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
                     ko_data.append({
                         "local" : ko_match.local ,
@@ -479,19 +488,23 @@ def generate_ko_points (request):
                     real_result = 0 
                 user_goal_diference = -us.local_score + us.visitor_score
                 real_goal_diference = -i.local_score + i.visitor_score
-                goals_diference_error  = abs(user_goal_diference - real_goal_diference)
                 
                 if us.punteable == 1 : 
                 
-                    rounds =[{"res": 4, "loc":1, "vis":1, "dif":1, "qual":3},
-                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":6},
-                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":10},
-                             {"res": 1, "loc":2, "vis":2, "dif":1, "qual":16}]
+                    rounds =[{"res": 1, "loc":1, "vis":1, "dif":1, "qual":3},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":10},
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":16}]
 
+                    teams_count= 0 
+                    if us.local == i.local: teams_count+=1 
+                    if us.visitor == i.visitor: teams_count+=1
 
+                    mult = [0,1,2,4]    
+                    mult2 = [0,1,1]
 
                     if user_result == real_result : 
-                        points += rounds[round-1]["res"]
+                        points += rounds[round-1]["res"] * mult[teams_count+1]
 
                     if us.local_score == i.local_score and us.local == i.local:
                         points+= rounds[round-1]["loc"]    #puntos por acertar goles del local
@@ -500,7 +513,7 @@ def generate_ko_points (request):
                         points+= rounds[round-1]["vis"] #punto por acertar goles del visitante
 
                     if user_goal_diference == real_goal_diference:
-                        points+= rounds[round-1]["dif"] #punto por acertar diferencia de goles
+                        points+= rounds[round-1]["dif"] * mult2[teams_count] #punto por acertar diferencia de goles
 
                     if us.qualified== i.qualified:
                         points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
