@@ -45,7 +45,6 @@
   <thead>
       <tr>
         <th scope="col" class="d-none d-sm-block">#</th>
-        <th scope="col"><span class="d-none d-sm-block">Partido   </span><span class="d-sm-none">Partido   </span></th>
         <th scope="col"><span class="d-none d-sm-block">Predicción</span><span class="d-sm-none">Pred</span></th>
         <th scope="col"><span class="d-none d-sm-block">Resultado </span><span class="d-sm-none">Res </span></th>
         <th scope="col"><span class="d-none d-sm-block">PTS       </span><span class="d-sm-none">PTS       </span></th>
@@ -59,9 +58,8 @@
 {% if x.round == 2 %}
 <tr>
   <th scope="row" class="d-none d-sm-block">{{forloop.counter}}</th>
-  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}</td>
-  <td>{{x.local_score}}:{{x.visitor_score}} </td>
-  <td>{{x.real_local_score}}:{{x.real_visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}  {{x.local_score}}:{{x.visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.real_local}}</span>{{x.real_local_flag}}: <span class="d-none d-sm-inline">{{x.real_visitor}}</span> {{x.real_visitor_flag}}  {{x.real_local_score}}:{{x.real_visitor_score}}</td>
   <td>{{x.points}}</td>
 </tr>
 {% endif %}
@@ -74,7 +72,6 @@
   <thead>
       <tr>
         <th scope="col" class="d-none d-sm-block">#</th>
-        <th scope="col"><span class="d-none d-sm-block">Partido   </span><span class="d-sm-none">Partido   </span></th>
         <th scope="col"><span class="d-none d-sm-block">Predicción</span><span class="d-sm-none">Pred</span></th>
         <th scope="col"><span class="d-none d-sm-block">Resultado </span><span class="d-sm-none">Res </span></th>
         <th scope="col"><span class="d-none d-sm-block">PTS       </span><span class="d-sm-none">PTS       </span></th>
@@ -88,9 +85,8 @@
 {% if x.round == 3 %}
 <tr>
   <th scope="row" class="d-none d-sm-block">{{forloop.counter}}</th>
-  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}</td>
-  <td>{{x.local_score}}:{{x.visitor_score}} </td>
-  <td>{{x.real_local_score}}:{{x.real_visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}  {{x.local_score}}:{{x.visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.real_local}}</span>{{x.real_local_flag}}: <span class="d-none d-sm-inline">{{x.real_visitor}}</span> {{x.real_visitor_flag}}  {{x.real_local_score}}:{{x.real_visitor_score}}</td>
   <td>{{x.points}}</td>
 </tr>
 {% endif %}
@@ -103,7 +99,6 @@
   <thead>
       <tr>
         <th scope="col" class="d-none d-sm-block">#</th>
-        <th scope="col"><span class="d-none d-sm-block">Partido   </span><span class="d-sm-none">Partido   </span></th>
         <th scope="col"><span class="d-none d-sm-block">Predicción</span><span class="d-sm-none">Pred</span></th>
         <th scope="col"><span class="d-none d-sm-block">Resultado </span><span class="d-sm-none">Res </span></th>
         <th scope="col"><span class="d-none d-sm-block">PTS       </span><span class="d-sm-none">PTS       </span></th>
@@ -117,9 +112,8 @@
 {% if x.round == 4 %}
 <tr>
   <th scope="row" class="d-none d-sm-block">{{forloop.counter}}</th>
-  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}</td>
-  <td>{{x.local_score}}:{{x.visitor_score}} </td>
-  <td>{{x.real_local_score}}:{{x.real_visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.local}}</span>{{x.local_flag}}: <span class="d-none d-sm-inline">{{x.visitor}}</span> {{x.visitor_flag}}  {{x.local_score}}:{{x.visitor_score}}</td>
+  <td><span class="d-none d-sm-inline">{{x.real_local}}</span>{{x.real_local_flag}}: <span class="d-none d-sm-inline">{{x.real_visitor}}</span> {{x.real_visitor_flag}}  {{x.real_local_score}}:{{x.real_visitor_score}}</td>
   <td>{{x.points}}</td>
 </tr>
 {% endif %}

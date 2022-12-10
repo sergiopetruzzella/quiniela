@@ -288,6 +288,8 @@ def user_puntuation (request,user):
                         "visitor_score": ko_match.visitor_score,
                         "visitor_flag": flags[ko_match.visitor],
                         "real_local_score"  : rks.local_score,
+                        "real_local_flag"  : flags[rks.local],
+                        "real_visitor_flag"  : flags[rks.visitor],
                         "real_local"  : rks.local,
                         "real_visitor": rks.visitor, 
                         "real_visitor_score": rks.visitor_score, 
