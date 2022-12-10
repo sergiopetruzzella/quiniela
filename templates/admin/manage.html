@@ -7,8 +7,14 @@
 <form action="." method="POST">
     {% csrf_token %}
 <input type="number" name="match_number" id="">
+<input type="text" name="local" id="">
 <input type="number" name="local_score" id="">
+<input type="text" name="visitor" id="">
 <input type="number" name="visitor_score" id="">
+<input type="number" name="round" id="">
+<input type="text" name="qual" id="">
+<input type="text" name="looser" id="">
+
 <button type="submit">Crear Nuevo Score </button>
 </form>
 

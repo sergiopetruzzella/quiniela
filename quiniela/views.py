@@ -82,10 +82,16 @@ def admin_manage_view (request):
 
 
     if request.method == "POST": 
-        RealScore.objects.create(
+        KORealScore.objects.create(
             local_score = request.POST.get("local_score"),
             visitor_score = request.POST.get("visitor_score"),
-            id = request.POST.get("match_number"))
+            id = request.POST.get("match_number"),
+            local = request.POST.get("local"),
+            visitor = request.POST.get("visitor"),
+            round = request.POST.get("round"),
+            qualified = request.POST.get("qual"),
+            looser =request.POST.get("looser"),
+            )
     all_scores = RealScore.objects.all()
     context =  {"all_scores" : all_scores}
     return  render(request, 'admin/manage.html', context)
