@@ -270,8 +270,8 @@ def user_puntuation (request,user):
                             points+= rounds[round-1]["loc"]    #puntos por acertar goles del loca
                         if ko_match.visitor_score == rks.visitor_score and ko_match.visitor == rks.visitor:
                             points+= rounds[round-1]["vis"] #punto por acertar goles del visitant
-                        if user_goal_diference == real_goal_diference * mult2[teams_count+1]:
-                            points+= rounds[round-1]["dif"] #punto por acertar diferencia de gole
+                        if user_goal_diference == real_goal_diference :
+                            points+= rounds[round-1]["dif"] * mult2[teams_count+1] #punto por acertar diferencia de gole
                         if ko_match.qualified== rks.qualified :
                             points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
                     ko_data.append({
