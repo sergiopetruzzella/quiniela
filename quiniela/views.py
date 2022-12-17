@@ -260,7 +260,7 @@ def user_puntuation (request,user):
                         rounds =[{"res": 1, "loc":1, "vis":1, "dif":1, "qual":3},
                              {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6},
                              {"res": 1, "loc":2, "vis":2, "dif":2, "qual":10},
-                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":16}]
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6}]
 
                         teams_count= 0 
                         if ko_match.local == rks.local: teams_count+=1 
@@ -280,6 +280,8 @@ def user_puntuation (request,user):
                             points+= rounds[round-1]["dif"] * mult2[teams_count] #punto por acertar diferencia de gole
                         if ko_match.qualified== rks.qualified :
                             points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
+                            if ko_match.match_number == 16 :
+                                points += 10 
                     ko_data.append({
                         "local" : ko_match.local ,
                         "local_flag": flags[ko_match.local],
@@ -502,7 +504,7 @@ def generate_ko_points (request):
                     rounds =[{"res": 1, "loc":1, "vis":1, "dif":1, "qual":3},
                              {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6},
                              {"res": 1, "loc":2, "vis":2, "dif":2, "qual":10},
-                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":16}]
+                             {"res": 1, "loc":2, "vis":2, "dif":2, "qual":6}]
 
                     teams_count= 0 
                     if us.local == i.local: teams_count+=1 
@@ -525,6 +527,8 @@ def generate_ko_points (request):
 
                     if us.qualified== i.qualified:
                         points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
+                        if us.match_number == 1:
+                                points += 10
             except:
                 pass
        
