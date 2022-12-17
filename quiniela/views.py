@@ -527,7 +527,7 @@ def generate_ko_points (request):
 
                     if us.qualified== i.qualified:
                         points+= rounds[round-1]["qual"] #punto por acertar goles del visitante
-                        if us.match_number == 1:
+                        if us.match_number == 16:
                                 points += 10
             except:
                 pass
