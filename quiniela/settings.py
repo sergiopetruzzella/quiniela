@@ -79,25 +79,25 @@ WSGI_APPLICATION = 'quiniela.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-DATABASES = {
-      'default': {
-          'ENGINE': 'django.db.backends.postgresql_psycopg2',
-          'NAME': 'd4snt4235j25o8', 
-          'USER': 'bknunwzhrjhmil',
-          'PASSWORD': 'c311acc3ab92feb6ffd31283e29ff6636f4e466214c9655ce49d9461ba1de418',
-          'HOST': 'ec2-54-159-22-90.compute-1.amazonaws.com',
-          'PORT':  '5432', 
-                  }
-  }
-
-
-
 # DATABASES = {
 #       'default': {
-#           'ENGINE': 'django.db.backends.sqlite3',
-#           'NAME': BASE_DIR / 'db.sqlite3',
-#       }
+#           'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#           'NAME': 'd4snt4235j25o8', 
+#           'USER': 'bknunwzhrjhmil',
+#           'PASSWORD': 'c311acc3ab92feb6ffd31283e29ff6636f4e466214c9655ce49d9461ba1de418',
+#           'HOST': 'ec2-54-159-22-90.compute-1.amazonaws.com',
+#           'PORT':  '5432', 
+#                   }
 #   }
+
+
+
+DATABASES = {
+      'default': {
+          'ENGINE': 'django.db.backends.sqlite3',
+          'NAME': BASE_DIR / 'db.sqlite3',
+      }
+  }
 
 
 # Password validation
